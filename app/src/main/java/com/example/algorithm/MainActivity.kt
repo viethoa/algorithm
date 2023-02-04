@@ -6,7 +6,8 @@ import com.example.algorithm.array.CountSubArray
 import com.example.algorithm.array.MinAbsoluteSumPair
 import com.example.algorithm.array.MinimumAbsoluteDifference
 import com.example.algorithm.hastable.UniqueCharacterInString
-import kotlin.math.abs
+import com.example.algorithm.stack.ReverseStackUsingRecursion
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,15 +18,28 @@ class MainActivity : AppCompatActivity() {
     private val uniqueCharacterInString by lazy { UniqueCharacterInString() }
     private val countSubArray by lazy { CountSubArray() }
     private val minimumAbsoluteDifference by lazy { MinimumAbsoluteDifference() }
+    private val reverseStack by lazy { ReverseStackUsingRecursion() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testMinimumAbsoluteDifference()
+        testReverseStack()
+        //testMinimumAbsoluteDifference()
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testReverseStack() {
+        val stack1 = Stack<Int>()
+        stack1.addAll(listOf(1, 5, 3, 2, 4))
+        reverseStack.execute(stack1)
+        stack1.forEach { println(it) }
+        val stack2 = Stack<Int>()
+        stack2.addAll(listOf(5, 17, 100, 11))
+        reverseStack.execute(stack2)
+        stack2.forEach { println(it) }
     }
 
     private fun testMinimumAbsoluteDifference() {

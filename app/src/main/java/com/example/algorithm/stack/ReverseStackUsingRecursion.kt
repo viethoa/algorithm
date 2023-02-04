@@ -27,8 +27,7 @@ class ReverseStackUsingRecursion {
         }
 
         // Hold all items in Function
-        val element = stack.peek()
-        stack.pop()
+        val element = stack.pop()
         execute(stack)
 
         // Insert all items held in Function one by one at the bottom
@@ -42,8 +41,8 @@ class ReverseStackUsingRecursion {
         }
 
         // Hold all items in Function
-        val element = stack.peek()
-        stack.pop()
+        // and insert value as first item
+        val element = stack.pop()
         insertAtBottom(stack, value)
 
         // Push all the held items back again

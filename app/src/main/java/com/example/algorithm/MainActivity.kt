@@ -6,7 +6,9 @@ import com.example.algorithm.array.CountSubArray
 import com.example.algorithm.array.MinAbsoluteSumPair
 import com.example.algorithm.array.MinimumAbsoluteDifference
 import com.example.algorithm.hastable.UniqueCharacterInString
+import com.example.algorithm.stack.CheckBalanceOfParenthesis
 import com.example.algorithm.stack.ReverseStackUsingRecursion
+import com.example.algorithm.stack.SortAStackUsingAnotherStack
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,16 +21,32 @@ class MainActivity : AppCompatActivity() {
     private val countSubArray by lazy { CountSubArray() }
     private val minimumAbsoluteDifference by lazy { MinimumAbsoluteDifference() }
     private val reverseStack by lazy { ReverseStackUsingRecursion() }
+    private val sortStackUsingAnotherStack by lazy { SortAStackUsingAnotherStack() }
+    private val checkBalanceOfParenthesis by lazy { CheckBalanceOfParenthesis() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testReverseStack()
+        testCheckBalanceOfParenthesis()
+        //testSortStartUsingAnotherStack()
+        //testReverseStack()
         //testMinimumAbsoluteDifference()
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testCheckBalanceOfParenthesis() {
+        println(checkBalanceOfParenthesis.isBalance("(([](){}))"))
+        println(checkBalanceOfParenthesis.isBalance("(([]({)}))"))
+    }
+
+    private fun testSortStartUsingAnotherStack() {
+        val stack = Stack<Int>()
+        stack.addAll(listOf(4, 3, 1, 6, 2, 5))
+        val output = sortStackUsingAnotherStack.execute(stack)
+        output.forEach { println(it) }
     }
 
     private fun testReverseStack() {

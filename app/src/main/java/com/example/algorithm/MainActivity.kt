@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.algorithm.array.CountSubArray
 import com.example.algorithm.array.MinAbsoluteSumPair
 import com.example.algorithm.array.MinimumAbsoluteDifference
+import com.example.algorithm.hastable.PairWithGivenSum
 import com.example.algorithm.hastable.UniqueCharacterInString
+import com.example.algorithm.hastable.ValidAnagram
 import com.example.algorithm.stack.CheckBalanceOfParenthesis
 import com.example.algorithm.stack.ReverseStackUsingRecursion
 import com.example.algorithm.stack.SortAStackUsingAnotherStack
@@ -23,18 +25,34 @@ class MainActivity : AppCompatActivity() {
     private val reverseStack by lazy { ReverseStackUsingRecursion() }
     private val sortStackUsingAnotherStack by lazy { SortAStackUsingAnotherStack() }
     private val checkBalanceOfParenthesis by lazy { CheckBalanceOfParenthesis() }
+    private val pairWithGivenSum by lazy { PairWithGivenSum() }
+    private val validAnagram by lazy { ValidAnagram() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testCheckBalanceOfParenthesis()
+        testValidAnagram()
+        //testPairWithGivenSum()
+        //testCheckBalanceOfParenthesis()
         //testSortStartUsingAnotherStack()
         //testReverseStack()
         //testMinimumAbsoluteDifference()
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testValidAnagram() {
+        println(validAnagram.solution1("listen", "silent"))
+        println(validAnagram.solution1("anagram", "nagaram"))
+        println(validAnagram.solution1("rat", "car"))
+    }
+
+    private fun testPairWithGivenSum() {
+        println(pairWithGivenSum.execute(listOf(1, 5, 7, -1, 5), 6))
+        println(pairWithGivenSum.execute(listOf(2, 5, 17, -1), 7))
+        println(pairWithGivenSum.execute(listOf(1, 5, 3, 3, 3), 6))
     }
 
     private fun testCheckBalanceOfParenthesis() {

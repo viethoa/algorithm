@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.algorithm.array.CountSubArray
 import com.example.algorithm.array.MinAbsoluteSumPair
 import com.example.algorithm.array.MinimumAbsoluteDifference
+import com.example.algorithm.hastable.LongestConsecutiveSequence
 import com.example.algorithm.hastable.PairWithGivenSum
 import com.example.algorithm.hastable.UniqueCharacterInString
 import com.example.algorithm.hastable.ValidAnagram
@@ -27,12 +28,14 @@ class MainActivity : AppCompatActivity() {
     private val checkBalanceOfParenthesis by lazy { CheckBalanceOfParenthesis() }
     private val pairWithGivenSum by lazy { PairWithGivenSum() }
     private val validAnagram by lazy { ValidAnagram() }
+    private val longestConsecutiveSequence by lazy { LongestConsecutiveSequence() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testValidAnagram()
+        testLongestConsecutiveSequence()
+        //testValidAnagram()
         //testPairWithGivenSum()
         //testCheckBalanceOfParenthesis()
         //testSortStartUsingAnotherStack()
@@ -41,6 +44,12 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testLongestConsecutiveSequence() {
+        println(longestConsecutiveSequence.execute(listOf(1, 9, 3, 10, 4, 20, 2)))
+        println(longestConsecutiveSequence.execute(listOf(0, 3, 7, 2, 5, 8, 4, 6, 0, 1)))
+        println(longestConsecutiveSequence.execute(listOf(36, 41, 56, 35, 44, 33, 34, 92, 43, 32, 42)))
     }
 
     private fun testValidAnagram() {

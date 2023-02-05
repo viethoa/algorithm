@@ -9,6 +9,8 @@ import com.example.algorithm.hastable.LongestConsecutiveSequence
 import com.example.algorithm.hastable.PairWithGivenSum
 import com.example.algorithm.hastable.UniqueCharacterInString
 import com.example.algorithm.hastable.ValidAnagram
+import com.example.algorithm.linkedlist.MergeTwoSortedLinkedList
+import com.example.algorithm.linkedlist.Node
 import com.example.algorithm.stack.CheckBalanceOfParenthesis
 import com.example.algorithm.stack.ReverseStackUsingRecursion
 import com.example.algorithm.stack.SortAStackUsingAnotherStack
@@ -29,12 +31,14 @@ class MainActivity : AppCompatActivity() {
     private val pairWithGivenSum by lazy { PairWithGivenSum() }
     private val validAnagram by lazy { ValidAnagram() }
     private val longestConsecutiveSequence by lazy { LongestConsecutiveSequence() }
+    private val mergeSortedLinkedList by lazy { MergeTwoSortedLinkedList() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testLongestConsecutiveSequence()
+        testMergeSortedLinkedList()
+        //testLongestConsecutiveSequence()
         //testValidAnagram()
         //testPairWithGivenSum()
         //testCheckBalanceOfParenthesis()
@@ -44,6 +48,25 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testMergeSortedLinkedList() {
+        println("Test Case 1")
+        var nodeA = Node(1, Node(3, Node(7)))
+        var nodeB = Node(1, Node(2))
+        var result = mergeSortedLinkedList.execute(nodeB, nodeA)
+        while (result != null) {
+            println(result.value)
+            result = result.next
+        }
+        println("Test Case 2")
+        nodeA = Node(5, Node(10, Node(15)))
+        nodeB = Node(2, Node(3, Node(20)))
+        result = mergeSortedLinkedList.execute(nodeB, nodeA)
+        while (result != null) {
+            println(result.value)
+            result = result.next
+        }
     }
 
     private fun testLongestConsecutiveSequence() {

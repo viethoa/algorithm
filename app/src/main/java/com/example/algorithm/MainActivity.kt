@@ -11,6 +11,8 @@ import com.example.algorithm.hastable.UniqueCharacterInString
 import com.example.algorithm.hastable.ValidAnagram
 import com.example.algorithm.linkedlist.MergeTwoSortedLinkedList
 import com.example.algorithm.linkedlist.Node
+import com.example.algorithm.linkedlist.RemoveNthNodeFromTheEnd
+import com.example.algorithm.linkedlist.RevertLinkedList
 import com.example.algorithm.stack.CheckBalanceOfParenthesis
 import com.example.algorithm.stack.ReverseStackUsingRecursion
 import com.example.algorithm.stack.SortAStackUsingAnotherStack
@@ -32,12 +34,16 @@ class MainActivity : AppCompatActivity() {
     private val validAnagram by lazy { ValidAnagram() }
     private val longestConsecutiveSequence by lazy { LongestConsecutiveSequence() }
     private val mergeSortedLinkedList by lazy { MergeTwoSortedLinkedList() }
+    private val revertLinkedList by lazy { RevertLinkedList() }
+    private val removeNthNodeFromTheEnd by lazy { RemoveNthNodeFromTheEnd() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testMergeSortedLinkedList()
+        testRemoveNthNodeFromTheEnd()
+        //testRevertLinkedList()
+        //testMergeSortedLinkedList()
         //testLongestConsecutiveSequence()
         //testValidAnagram()
         //testPairWithGivenSum()
@@ -48,6 +54,40 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testRemoveNthNodeFromTheEnd() {
+        println("Test Case 1")
+        var head = Node(2, Node(3, Node(1, Node(7))))
+        var result: Node? = removeNthNodeFromTheEnd.execute(head, 1)
+        while (result != null) {
+            println(result.value)
+            result = result.next
+        }
+        println("Test Case 2")
+        head = Node(1, Node(2, Node(3, Node(4))))
+        result = removeNthNodeFromTheEnd.execute(head, 5)
+        while (result != null) {
+            println(result.value)
+            result = result.next
+        }
+    }
+
+    private fun testRevertLinkedList() {
+        println("Test Case 1")
+        var head = Node(1, Node(2, Node(3, Node(4))))
+        var result: Node? = revertLinkedList.solution1(head)
+        while (result != null) {
+            println(result.value)
+            result = result.next
+        }
+        println("Test Case 2")
+        head = Node(5, Node(4, Node(3, Node(2, Node(1)))))
+        result = revertLinkedList.solution1(head)
+        while (result != null) {
+            println(result.value)
+            result = result.next
+        }
     }
 
     private fun testMergeSortedLinkedList() {

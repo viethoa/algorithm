@@ -13,6 +13,7 @@ import com.example.algorithm.linkedlist.MergeTwoSortedLinkedList
 import com.example.algorithm.linkedlist.Node
 import com.example.algorithm.linkedlist.RemoveNthNodeFromTheEnd
 import com.example.algorithm.linkedlist.RevertLinkedList
+import com.example.algorithm.queue.RevertKElementOfQueue
 import com.example.algorithm.stack.CheckBalanceOfParenthesis
 import com.example.algorithm.stack.ReverseStackUsingRecursion
 import com.example.algorithm.stack.SortAStackUsingAnotherStack
@@ -36,12 +37,14 @@ class MainActivity : AppCompatActivity() {
     private val mergeSortedLinkedList by lazy { MergeTwoSortedLinkedList() }
     private val revertLinkedList by lazy { RevertLinkedList() }
     private val removeNthNodeFromTheEnd by lazy { RemoveNthNodeFromTheEnd() }
+    private val revertKElementOfQueue by lazy { RevertKElementOfQueue() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testRemoveNthNodeFromTheEnd()
+        testRevertKElementOfQueue()
+        //testRemoveNthNodeFromTheEnd()
         //testRevertLinkedList()
         //testMergeSortedLinkedList()
         //testLongestConsecutiveSequence()
@@ -54,6 +57,13 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testRevertKElementOfQueue() {
+        val input = LinkedList<Int>()
+        input.addAll(listOf(1, 2, 3, 5, 6, 7, 8, 9, 10))
+        revertKElementOfQueue.execute(input, 1)
+        input.forEach { println(it) }
     }
 
     private fun testRemoveNthNodeFromTheEnd() {

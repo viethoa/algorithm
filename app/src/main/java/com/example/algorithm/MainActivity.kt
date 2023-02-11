@@ -17,6 +17,9 @@ import com.example.algorithm.queue.RevertKElementOfQueue
 import com.example.algorithm.stack.CheckBalanceOfParenthesis
 import com.example.algorithm.stack.ReverseStackUsingRecursion
 import com.example.algorithm.stack.SortAStackUsingAnotherStack
+import com.example.algorithm.tree.BinaryTreeNode
+import com.example.algorithm.tree.CountBSTSubtreeNode
+import com.example.algorithm.tree.FindHeightOfBinaryTree
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -38,12 +41,16 @@ class MainActivity : AppCompatActivity() {
     private val revertLinkedList by lazy { RevertLinkedList() }
     private val removeNthNodeFromTheEnd by lazy { RemoveNthNodeFromTheEnd() }
     private val revertKElementOfQueue by lazy { RevertKElementOfQueue() }
+    private val findHeightOfBinaryTree by lazy { FindHeightOfBinaryTree() }
+    private val countBSTSubtreeNode by lazy { CountBSTSubtreeNode() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testRevertKElementOfQueue()
+        testCountBSTSubtreeNode()
+        //testFindHeightOfBinaryTree()
+        //testRevertKElementOfQueue()
         //testRemoveNthNodeFromTheEnd()
         //testRevertLinkedList()
         //testMergeSortedLinkedList()
@@ -57,6 +64,33 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testCountBSTSubtreeNode() {
+        val node = BinaryTreeNode(
+            10,
+            BinaryTreeNode(5,
+                BinaryTreeNode(1)),
+            BinaryTreeNode(50,
+                BinaryTreeNode(40),
+                BinaryTreeNode(100)
+            )
+        )
+        println(countBSTSubtreeNode.execute(node, Pair(5, 45)))
+        println(countBSTSubtreeNode.execute(node, Pair(1, 45)))
+    }
+
+    private fun testFindHeightOfBinaryTree() {
+        val node = BinaryTreeNode(
+            5,
+            BinaryTreeNode(3,
+                BinaryTreeNode(2,
+                    BinaryTreeNode(1)
+                ),
+                BinaryTreeNode(4)),
+            BinaryTreeNode(6)
+        )
+        println(findHeightOfBinaryTree.execute(node))
     }
 
     private fun testRevertKElementOfQueue() {

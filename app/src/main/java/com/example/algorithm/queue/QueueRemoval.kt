@@ -1,7 +1,6 @@
 package com.example.algorithm.queue
 
-import java.util.LinkedList
-import java.util.Queue
+import java.util.*
 
 /**
  * You're given a list of n integers arr, which represent elements in a queue (in order from front to back).
@@ -47,26 +46,68 @@ data class Element(
     val value: Int,
     val index: Int
 ) {
-    fun value(): Int = this.value
-    fun index(): Int = this.index
+    fun decrease(): Element {
+        var newValue = value - 1
+        if (newValue < 0) {
+            newValue = 0
+        }
+        return Element(newValue, index)
+    }
 }
 
 class QueueRemoval {
 
     /**
      * Solution
-     * 1. Store
+     * 1. Store original index and value
+     * 2. Do the 3 steps with x times
+     * 3. Return the list of original index
      */
     fun execute(input: Queue<Int>, x: Int): List<Int> {
-        if (input.isEmpty()) {
+        if (input.isEmpty() || x <= 0) {
             return emptyList()
         }
 
         // Hold original index
         val queue = LinkedList<Element>()
-        input.forEachIndexed { index, e -> queue.add(Element(e, index)) }
+        input.forEachIndexed { index, e -> queue.add(Element(e, index + 1)) }
 
-        return emptyList()
+        // Doing the 3 steps
+        val result = arrayListOf<Int>()
+        for (i in 1..x) {
+            result.addAll(performRemove(queue, x))
+        }
+
+        return result
     }
 
+    private fun performRemove(queue: LinkedList<Element>, x: Int): List<Int> {
+        if (queue.isEmpty() || x <= 0) {
+            return emptyList()
+        }
+
+        var max = Element(Int.MIN_VALUE, -1)
+        val popList = arrayListOf<Element>()
+
+        // find max element
+        for (i in 1..x) {
+            if (queue.isEmpty()) {
+                break
+            }
+            val element = queue.pop()
+            popList.add(element)
+            if (element.value > max.value) {
+                max = element
+            }
+        }
+
+        // Put element back to queue
+        popList.forEach { element ->
+            if (element != max) {
+                queue.add(element.decrease())
+            }
+        }
+
+        return listOf(max.index)
+    }
 }

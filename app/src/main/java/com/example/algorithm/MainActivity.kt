@@ -13,6 +13,7 @@ import com.example.algorithm.linkedlist.MergeTwoSortedLinkedList
 import com.example.algorithm.linkedlist.Node
 import com.example.algorithm.linkedlist.RemoveNthNodeFromTheEnd
 import com.example.algorithm.linkedlist.RevertLinkedList
+import com.example.algorithm.queue.QueueRemoval
 import com.example.algorithm.queue.RevertKElementOfQueue
 import com.example.algorithm.stack.CheckBalanceOfParenthesis
 import com.example.algorithm.stack.ReverseStackUsingRecursion
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     private val revertLinkedList by lazy { RevertLinkedList() }
     private val removeNthNodeFromTheEnd by lazy { RemoveNthNodeFromTheEnd() }
     private val revertKElementOfQueue by lazy { RevertKElementOfQueue() }
+    private val queueRemoval by lazy { QueueRemoval() }
     private val findHeightOfBinaryTree by lazy { FindHeightOfBinaryTree() }
     private val countBSTSubtreeNode by lazy { CountBSTSubtreeNode() }
 
@@ -48,8 +50,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testCountBSTSubtreeNode()
+        //testCountBSTSubtreeNode()
         //testFindHeightOfBinaryTree()
+        testQueueRemoval()
         //testRevertKElementOfQueue()
         //testRemoveNthNodeFromTheEnd()
         //testRevertLinkedList()
@@ -91,6 +94,12 @@ class MainActivity : AppCompatActivity() {
             BinaryTreeNode(6)
         )
         println(findHeightOfBinaryTree.execute(node))
+    }
+
+    private fun testQueueRemoval() {
+        val input = LinkedList<Int>()
+        input.addAll(listOf(1, 2, 2, 3, 4, 5))
+        println(queueRemoval.execute(input, 5))
     }
 
     private fun testRevertKElementOfQueue() {

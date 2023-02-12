@@ -13,14 +13,14 @@ package com.example.algorithm.hastable
  * sum = 7
  * Output: (2, 5)
  *
- * @notes
- * - HashMap solution is not solve all cases
- * - Better use 2 loops
+ * Input: arr[] = {1, 5, 3, 3, 3},
+ * sum = 6
+ * Output: (1, 5) (3, 3) (3, 3) (3, 3)
  */
 class PairWithGivenSum {
 
     fun execute(input: List<Int>, sum: Int): List<Pair<Int, Int>> {
-        if (input.isEmpty() || input.size == 1) {
+        if (input.size <= 1) {
             return emptyList()
         }
 
@@ -34,22 +34,19 @@ class PairWithGivenSum {
             }
         }
 
-        // map contains difference = sum - element
-        // Pair-Sum will be the count
-        // - 1 Pair: ([difference, element])
-        // - n(n-1)/2 Pairs: ([difference, element]... [difference, element])
-        val result = arrayListOf<Pair<Int, Int>>()
-        val sumMinusElements = arrayListOf<Int>()
-        map.forEach { (element, count) ->
+        val output = arrayListOf<Pair<Int, Int>>()
+        input.forEach { element ->
             val difference = sum - element
-            if (map.contains(difference) && !sumMinusElements.contains(element)) {
-                sumMinusElements.add(difference)
-                for (i in 0..count) {
-                    result.add(Pair(difference, element))
+            if (map.contains(difference)) {
+                val mapElement = map[difference]
+                for (i in 0..mapElement!!) {
+                    output.add(Pair(element, difference))
                 }
+                map.remove(difference)
+                map.remove(element)
             }
         }
 
-        return result
+        return output
     }
 }

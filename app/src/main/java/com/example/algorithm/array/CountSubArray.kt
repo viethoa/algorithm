@@ -21,8 +21,6 @@ package com.example.algorithm.array
  * 6. {7}
  *
  * Notes: {4, 5, 3, 2, 7} = n(n+1)/2 = (5 * 6) / 2 = 15
- *
- * {0, 1, 2, 3, 4}
  */
 class CountSubArray {
 

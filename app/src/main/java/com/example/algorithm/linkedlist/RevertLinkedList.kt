@@ -33,9 +33,8 @@ class RevertLinkedList {
 
         var prev: Node? = null
         var current: Node? = head
-        var next: Node? = null
         while (current != null) {
-            next = current.next
+            val next = current.next
             current.next = prev
             prev = current
             current = next

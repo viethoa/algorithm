@@ -48,7 +48,7 @@ class RevertKElementOfQueue {
         if (k == 0) {
             return
         }
-        // Whole K elements
+        // Hold K elements
         val element = input.poll()
         revertKElement(input, k - 1)
 

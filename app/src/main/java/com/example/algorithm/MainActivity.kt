@@ -22,6 +22,7 @@ import com.example.algorithm.tree.BinaryTreeNode
 import com.example.algorithm.tree.CountBSTSubtreeNode
 import com.example.algorithm.tree.FindHeightOfBinaryTree
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,11 +46,13 @@ class MainActivity : AppCompatActivity() {
     private val queueRemoval by lazy { QueueRemoval() }
     private val findHeightOfBinaryTree by lazy { FindHeightOfBinaryTree() }
     private val countBSTSubtreeNode by lazy { CountBSTSubtreeNode() }
+    private val countIsland by lazy { CountIsland() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        testCountIsland()
         //testCountBSTSubtreeNode()
         //testFindHeightOfBinaryTree()
         //testQueueRemoval()
@@ -59,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         //testMergeSortedLinkedList()
         //testLongestConsecutiveSequence()
         //testValidAnagram()
-        testPairWithGivenSum()
+        //testPairWithGivenSum()
         //testCheckBalanceOfParenthesis()
         //testSortStartUsingAnotherStack()
         //testReverseStack()
@@ -67,6 +70,25 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testCountIsland() {
+        var matrix = arrayListOf(
+            arrayListOf(0, 1, 1, 0, 0, 0, 1),
+            arrayListOf(0, 1, 0, 0, 1, 1, 0),
+            arrayListOf(0, 1, 1, 0, 0, 1, 0),
+            arrayListOf(0, 0, 0, 0, 0, 0, 0),
+            arrayListOf(0, 1, 1, 1, 1, 1, 0)
+        )
+        println(countIsland.execute(matrix))
+        matrix = arrayListOf(
+            arrayListOf(1, 1, 0, 0, 0),
+            arrayListOf(0, 1, 0, 0, 1),
+            arrayListOf(0, 0, 0, 0, 0),
+            arrayListOf(0, 0, 0, 0, 0),
+            arrayListOf(1, 0, 1, 1, 0)
+        )
+        println(countIsland.execute(matrix))
     }
 
     private fun testCountBSTSubtreeNode() {

@@ -28,43 +28,42 @@ class MergeTwoSortedLinkedList {
      * 2. Node-element can be added in end of linked list
      * 3. Node-element can be added in the middle of linked list
      */
-    fun execute(headA: Node?, headB: Node?): Node? {
-        var nodeA: Node? = headA ?: return headB
-        var nodeB: Node? = headB ?: return headA
+    fun execute(headA: Node, headB: Node): Node? {
+        var nodeA: Node? = headA
+        var nodeB: Node = headB
+        var newHead = headB
 
-        var headOfResult = headB
         while (nodeA != null) {
-            // Find position to insert nodeA into Linked-List B
-            // Or until end of list
-            while (nodeB?.next != null && nodeA.value >= nodeB.value) {
-                val next = nodeB.next!!
-                when {
-                    nodeA.value >= next.value -> {
-                        nodeB = nodeB.next
-                    }
-                    else -> break
+            // Find position to insert nodeA into Linked-List B (insert to the front),
+            // or until end of list (Node-B will be last node).
+            var previousB = nodeB
+            while (nodeA.value > nodeB.value) {
+                if (nodeB.next == null) {
+                    break
                 }
+                previousB = nodeB
+                nodeB = nodeB.next!!
             }
             when {
                 // Add as new head
-                nodeB == headOfResult && nodeB?.value!! > nodeA.value -> {
-                    headOfResult = addHead(nodeB, Node(nodeA.value))
+                nodeB == newHead -> {
+                    newHead = addHead(nodeB, Node(nodeA.value))
                 }
-                // Add in front of node
-                nodeB?.value!! > nodeA.value -> {
+                // Insert to end linked list
+                nodeB.next == null -> {
                     addNode(nodeB, Node(nodeA.value))
                 }
-                // Add behind of node
+                // Insert to front
                 else -> {
-                    addNode(nodeB, Node(nodeA.value))
+                    addNode(previousB, Node(nodeA.value))
                 }
             }
 
             nodeA = nodeA.next
-            nodeB = headOfResult
+            nodeB = newHead
         }
 
-        return headOfResult
+        return newHead
     }
 
     private fun addNode(head: Node, node: Node) {

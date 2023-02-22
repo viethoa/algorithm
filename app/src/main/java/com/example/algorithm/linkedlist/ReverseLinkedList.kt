@@ -16,7 +16,7 @@ package com.example.algorithm.linkedlist
  * Output: Linked list should be changed to,
  * 5->4->3->2->1->NULL
  */
-class RevertLinkedList {
+class ReverseLinkedList {
 
     /**
      * Solution

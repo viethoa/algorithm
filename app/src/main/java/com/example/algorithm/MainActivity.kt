@@ -9,12 +9,9 @@ import com.example.algorithm.hastable.LongestConsecutiveSequence
 import com.example.algorithm.hastable.PairWithGivenSum
 import com.example.algorithm.hastable.UniqueCharacterInString
 import com.example.algorithm.hastable.ValidAnagram
-import com.example.algorithm.linkedlist.MergeTwoSortedLinkedList
-import com.example.algorithm.linkedlist.Node
-import com.example.algorithm.linkedlist.RemoveNthNodeFromTheEnd
-import com.example.algorithm.linkedlist.RevertLinkedList
+import com.example.algorithm.linkedlist.*
 import com.example.algorithm.queue.QueueRemoval
-import com.example.algorithm.queue.RevertKElementOfQueue
+import com.example.algorithm.queue.ReverseKElementOfQueue
 import com.example.algorithm.stack.CheckBalanceOfParenthesis
 import com.example.algorithm.stack.ReverseStackUsingRecursion
 import com.example.algorithm.stack.SortAStackUsingAnotherStack
@@ -22,7 +19,6 @@ import com.example.algorithm.tree.BinaryTreeNode
 import com.example.algorithm.tree.CountBSTSubtreeNode
 import com.example.algorithm.tree.FindHeightOfBinaryTree
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,25 +36,27 @@ class MainActivity : AppCompatActivity() {
     private val validAnagram by lazy { ValidAnagram() }
     private val longestConsecutiveSequence by lazy { LongestConsecutiveSequence() }
     private val mergeSortedLinkedList by lazy { MergeTwoSortedLinkedList() }
-    private val revertLinkedList by lazy { RevertLinkedList() }
+    private val reverseLinkedList by lazy { ReverseLinkedList() }
     private val removeNthNodeFromTheEnd by lazy { RemoveNthNodeFromTheEnd() }
-    private val revertKElementOfQueue by lazy { RevertKElementOfQueue() }
+    private val reverseKElementOfQueue by lazy { ReverseKElementOfQueue() }
     private val queueRemoval by lazy { QueueRemoval() }
     private val findHeightOfBinaryTree by lazy { FindHeightOfBinaryTree() }
     private val countBSTSubtreeNode by lazy { CountBSTSubtreeNode() }
     private val countIsland by lazy { CountIsland() }
+    private val reverseKNodeFromHead by lazy { ReverseKNodeFromHead() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testCountIsland()
+        testReverseKNodeFromHead()
+        //testCountIsland()
         //testCountBSTSubtreeNode()
         //testFindHeightOfBinaryTree()
         //testQueueRemoval()
-        //testRevertKElementOfQueue()
+        //testReverseKElementOfQueue()
         //testRemoveNthNodeFromTheEnd()
-        //testRevertLinkedList()
+        //testReverseLinkedList()
         //testMergeSortedLinkedList()
         //testLongestConsecutiveSequence()
         //testValidAnagram()
@@ -70,6 +68,23 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testReverseKNodeFromHead() {
+        println("Test Case 1")
+        var head = Node(1, Node(2, Node(3, Node(4, Node(5)))))
+        var result: Node? = reverseKNodeFromHead.execute(head, 2)
+        while (result != null) {
+            println(result.value)
+            result = result.next
+        }
+        println("Test Case 2")
+        head = Node(1, Node(2, Node(3, Node(4, Node(5)))))
+        result = reverseKNodeFromHead.execute(head, 5)
+        while (result != null) {
+            println(result.value)
+            result = result.next
+        }
     }
 
     private fun testCountIsland() {
@@ -124,10 +139,10 @@ class MainActivity : AppCompatActivity() {
         println(queueRemoval.execute(input, 5))
     }
 
-    private fun testRevertKElementOfQueue() {
+    private fun testReverseKElementOfQueue() {
         val input = LinkedList<Int>()
         input.addAll(listOf(1, 2, 3, 5, 6, 7, 8, 9, 10))
-        revertKElementOfQueue.execute(input, 1)
+        reverseKElementOfQueue.execute(input, 1)
         input.forEach { println(it) }
     }
 
@@ -148,17 +163,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun testRevertLinkedList() {
+    private fun testReverseLinkedList() {
         println("Test Case 1")
         var head = Node(1, Node(2, Node(3, Node(4))))
-        var result: Node? = revertLinkedList.solution1(head)
+        var result: Node? = reverseLinkedList.solution1(head)
         while (result != null) {
             println(result.value)
             result = result.next
         }
         println("Test Case 2")
         head = Node(5, Node(4, Node(3, Node(2, Node(1)))))
-        result = revertLinkedList.solution1(head)
+        result = reverseLinkedList.solution1(head)
         while (result != null) {
             println(result.value)
             result = result.next

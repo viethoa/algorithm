@@ -35,14 +35,17 @@ class RemoveNthNodeFromTheEnd {
         var first: Node? = head
         var second: Node? = head
         var prevOfFirst: Node? = null
+        // Move second-node to n-th node from head
+        // Or move to the end (last node)
         while (second?.next != null && count > 1) {
             second = second.next
             count -= 1
         }
+        // Move second-node & first-node together to the end
         while (second?.next != null) {
-            second = second.next
             prevOfFirst = first
             first = first?.next
+            second = second.next
         }
 
         // Remove head

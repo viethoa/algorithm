@@ -42,8 +42,8 @@ class PairWithGivenSum {
                 for (i in 0..mapElement!!) {
                     output.add(Pair(element, difference))
                 }
-                map.remove(difference)
-                map.remove(element)
+                map.remove(difference) /* Need to remove to avoid duplicated */
+                map.remove(element) /* Need to remove to avoid duplicated */
             }
         }
 

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.algorithm.array.CountSubArray
 import com.example.algorithm.array.MinAbsoluteSumPair
 import com.example.algorithm.array.MinimumAbsoluteDifference
+import com.example.algorithm.array.SwapToHaveLargestNumber
 import com.example.algorithm.hastable.LongestConsecutiveSequence
 import com.example.algorithm.hastable.PairWithGivenSum
 import com.example.algorithm.hastable.UniqueCharacterInString
@@ -44,12 +45,14 @@ class MainActivity : AppCompatActivity() {
     private val countBSTSubtreeNode by lazy { CountBSTSubtreeNode() }
     private val countIsland by lazy { CountIsland() }
     private val reverseKNodeFromHead by lazy { ReverseKNodeFromHead() }
+    private val swapToHaveLargestNumber by lazy { SwapToHaveLargestNumber() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testReverseKNodeFromHead()
+        testSwapToHaveLargestNumber()
+        //testReverseKNodeFromHead()
         //testCountIsland()
         //testCountBSTSubtreeNode()
         //testFindHeightOfBinaryTree()
@@ -68,6 +71,17 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testSwapToHaveLargestNumber() {
+        println("Loop Solution")
+        println(swapToHaveLargestNumber.useLoopSolution(listOf(1, 9, 7, 3)))
+        println(swapToHaveLargestNumber.useLoopSolution(listOf(9, 2, 8, 8, 3)))
+        println(swapToHaveLargestNumber.useLoopSolution(listOf(9, 8, 3, 2)))
+        println("Sort Solution")
+        println(swapToHaveLargestNumber.useSortSolution(listOf(1, 9, 7, 3)))
+        println(swapToHaveLargestNumber.useSortSolution(listOf(9, 2, 8, 8, 3)))
+        println(swapToHaveLargestNumber.useSortSolution(listOf(9, 8, 3, 2)))
     }
 
     private fun testReverseKNodeFromHead() {

@@ -8,6 +8,7 @@ import com.example.algorithm.array.MinimumAbsoluteDifference
 import com.example.algorithm.array.SwapToHaveLargestNumber
 import com.example.algorithm.hastable.LongestConsecutiveSequence
 import com.example.algorithm.hastable.PairWithGivenSum
+import com.example.algorithm.hastable.SumThreeNumberEqualToZero
 import com.example.algorithm.hastable.UniqueCharacterInString
 import com.example.algorithm.hastable.ValidAnagram
 import com.example.algorithm.linkedlist.*
@@ -46,12 +47,14 @@ class MainActivity : AppCompatActivity() {
     private val countIsland by lazy { CountIsland() }
     private val reverseKNodeFromHead by lazy { ReverseKNodeFromHead() }
     private val swapToHaveLargestNumber by lazy { SwapToHaveLargestNumber() }
+    private val sumThreeNumberEqualToZero by lazy { SumThreeNumberEqualToZero() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testSwapToHaveLargestNumber()
+        testSumThreeNumberEqualToZero()
+        //testSwapToHaveLargestNumber()
         //testReverseKNodeFromHead()
         //testCountIsland()
         //testCountBSTSubtreeNode()
@@ -71,6 +74,25 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testSumThreeNumberEqualToZero() {
+        println("Loop Solution")
+        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(2, -3, 1)))
+        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(0, -1, 2, -3, 1)))
+        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(1, -2, -2, 0, 5)))
+        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(0, -1, 5, 10, 14, -7, -3, 4, 1)))
+        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(0, -3, 5, 10, 14, -7, -6, 2, 1)))
+        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(3, 3, -2, 10, -7, 3, -6, 1)))
+        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(0, 1, 5, 10, -7, 3, 8, 1)))
+        println("Sort Solution")
+        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(2, -3, 1)))
+        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(0, -1, 2, -3, 1)))
+        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(1, -2, -2, 0, 5)))
+        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(0, -1, 5, 10, 14, -7, -3, 4, 1)))
+        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(0, -3, 5, 10, 14, -7, -6, 2, 1)))
+        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(3, 3, -2, 10, -7, 3, -6, 1)))
+        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(0, 1, 5, 10, -7, 3, 8, 1)))
     }
 
     private fun testSwapToHaveLargestNumber() {

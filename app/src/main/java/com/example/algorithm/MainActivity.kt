@@ -2,7 +2,9 @@ package com.example.algorithm
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.algorithm.array.CountAllPalindromeSubString
 import com.example.algorithm.array.CountSubArray
+import com.example.algorithm.array.KthLargestElementInArray
 import com.example.algorithm.array.MinAbsoluteSumPair
 import com.example.algorithm.array.MinimumAbsoluteDifference
 import com.example.algorithm.array.SwapToHaveLargestNumber
@@ -19,7 +21,11 @@ import com.example.algorithm.stack.ReverseStackUsingRecursion
 import com.example.algorithm.stack.SortAStackUsingAnotherStack
 import com.example.algorithm.tree.BinaryTreeNode
 import com.example.algorithm.tree.CountBSTSubtreeNode
+import com.example.algorithm.tree.FindBinaryTreeWidth
 import com.example.algorithm.tree.FindHeightOfBinaryTree
+import com.example.algorithm.tree.FindParentOfNode
+import com.example.algorithm.tree.FindParentOfTwoNode
+import com.example.algorithm.tree.NodeWithParent
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -48,12 +54,22 @@ class MainActivity : AppCompatActivity() {
     private val reverseKNodeFromHead by lazy { ReverseKNodeFromHead() }
     private val swapToHaveLargestNumber by lazy { SwapToHaveLargestNumber() }
     private val sumThreeNumberEqualToZero by lazy { SumThreeNumberEqualToZero() }
+    private val kthLargestElementInArray by lazy { KthLargestElementInArray() }
+    private val findBinaryTreeWidth by lazy { FindBinaryTreeWidth() }
+    private val countAllPalindromeSubString by lazy { CountAllPalindromeSubString() }
+    private val findParentOfNode by lazy { FindParentOfNode() }
+    private val findParentOfTwoNode by lazy { FindParentOfTwoNode() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testSumThreeNumberEqualToZero()
+        testFindParentOfTwoNode()
+        //testFindParentOfNode()
+        //testCountAllPalindromeSubString()
+        //testFindBinaryTreeWidth()
+        //testKthLargestElementInArray()
+        //testSumThreeNumberEqualToZero()
         //testSwapToHaveLargestNumber()
         //testReverseKNodeFromHead()
         //testCountIsland()
@@ -74,6 +90,64 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testFindParentOfTwoNode() {
+        val head = NodeWithParent(
+            1,
+            NodeWithParent(
+                2,
+                NodeWithParent(4, left = NodeWithParent(6)),
+                NodeWithParent(5, right = NodeWithParent(7))
+            ),
+            NodeWithParent(3, right = NodeWithParent(8))
+        )
+        println(findParentOfTwoNode.solution(head, NodeWithParent(4), NodeWithParent(5)))
+        println(findParentOfTwoNode.solution(head, NodeWithParent(1), NodeWithParent(1)))
+        println(findParentOfTwoNode.solution(head, NodeWithParent(4), NodeWithParent(3)))
+        println(findParentOfTwoNode.solution(head, NodeWithParent(5), NodeWithParent(7)))
+        println(findParentOfTwoNode.solution(head, NodeWithParent(4), NodeWithParent(5)))
+        println(findParentOfTwoNode.solution(head, NodeWithParent(5), NodeWithParent(8)))
+        println(findParentOfTwoNode.solution(head, NodeWithParent(6), NodeWithParent(6)))
+    }
+
+    private fun testFindParentOfNode() {
+        val head = BinaryTreeNode(
+            1,
+            BinaryTreeNode(
+                2,
+                BinaryTreeNode(4, left = BinaryTreeNode(6)),
+                BinaryTreeNode(5, right = BinaryTreeNode(7))
+            ),
+            BinaryTreeNode(3, right = BinaryTreeNode(8))
+        )
+        println(findParentOfNode.solution(head, BinaryTreeNode(1)))
+        println(findParentOfNode.solution(head, BinaryTreeNode(4)))
+    }
+
+    private fun testCountAllPalindromeSubString() {
+        println(countAllPalindromeSubString.solution("aa"))
+        println(countAllPalindromeSubString.solution("bbb"))
+        println(countAllPalindromeSubString.solution("abaab"))
+        println(countAllPalindromeSubString.solution("abbaeae"))
+    }
+
+    private fun testFindBinaryTreeWidth() {
+        val head = BinaryTreeNode(
+            1,
+            BinaryTreeNode(
+                2,
+                BinaryTreeNode(4, left = BinaryTreeNode(6)),
+                BinaryTreeNode(5, right = BinaryTreeNode(7))
+            ),
+            BinaryTreeNode(3, right = BinaryTreeNode(8))
+        )
+        println(findBinaryTreeWidth.solution(head))
+    }
+
+    private fun testKthLargestElementInArray() {
+        println(kthLargestElementInArray.solution(listOf(3, 2, 1, 5, 6, 4), 2))
+        println(kthLargestElementInArray.solution(listOf(6, 2, 3, 1, 2, 4, 5, 5, 6), 4))
     }
 
     private fun testSumThreeNumberEqualToZero() {
@@ -145,9 +219,12 @@ class MainActivity : AppCompatActivity() {
     private fun testCountBSTSubtreeNode() {
         val node = BinaryTreeNode(
             10,
-            BinaryTreeNode(5,
-                BinaryTreeNode(1)),
-            BinaryTreeNode(50,
+            BinaryTreeNode(
+                5,
+                BinaryTreeNode(1)
+            ),
+            BinaryTreeNode(
+                50,
                 BinaryTreeNode(40),
                 BinaryTreeNode(100)
             )
@@ -159,11 +236,14 @@ class MainActivity : AppCompatActivity() {
     private fun testFindHeightOfBinaryTree() {
         val node = BinaryTreeNode(
             5,
-            BinaryTreeNode(3,
-                BinaryTreeNode(2,
+            BinaryTreeNode(
+                3,
+                BinaryTreeNode(
+                    2,
                     BinaryTreeNode(1)
                 ),
-                BinaryTreeNode(4)),
+                BinaryTreeNode(4)
+            ),
             BinaryTreeNode(6)
         )
         println(findHeightOfBinaryTree.execute(node))

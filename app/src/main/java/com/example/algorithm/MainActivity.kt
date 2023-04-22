@@ -27,6 +27,7 @@ import com.example.algorithm.tree.FindBinaryTreeWidth
 import com.example.algorithm.tree.FindHeightOfBinaryTree
 import com.example.algorithm.tree.FindParentOfNode
 import com.example.algorithm.tree.FindParentOfTwoNode
+import com.example.algorithm.tree.TreeTraversalInIterative
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.util.*
@@ -62,6 +63,7 @@ class MainActivity : AppCompatActivity() {
     private val countAllPalindromeSubString by lazy { CountAllPalindromeSubString() }
     private val findParentOfNode by lazy { FindParentOfNode() }
     private val findParentOfTwoNode by lazy { FindParentOfTwoNode() }
+    private val treeTraversalInIterative by lazy { TreeTraversalInIterative() }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun LocalDateTime.toUTCTimeZone(): LocalDateTime {
@@ -76,7 +78,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testFindParentOfTwoNode()
+        testTreeTraversalInIterative()
+        //testFindParentOfTwoNode()
         //testFindParentOfNode()
         //testCountAllPalindromeSubString()
         //testFindBinaryTreeWidth()
@@ -102,6 +105,19 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testTreeTraversalInIterative() {
+        val node = BinaryTreeNode(
+            1,
+            BinaryTreeNode(
+                2,
+                BinaryTreeNode(4, left = BinaryTreeNode(6)),
+                BinaryTreeNode(5, right = BinaryTreeNode(7))
+            ),
+            BinaryTreeNode(3, right = BinaryTreeNode(8))
+        )
+        treeTraversalInIterative.solution(node)
     }
 
     private fun testFindParentOfTwoNode() {

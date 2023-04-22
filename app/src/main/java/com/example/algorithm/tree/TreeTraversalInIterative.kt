@@ -4,6 +4,13 @@ import java.util.Stack
 
 /**
  * Travel a tree without recursive
+ *              1
+ *            /   \
+ *          2      3
+ *        /   \     \
+ *       4     5     8
+ *      /       \
+ *     6         7
  */
 class TreeTraversalInIterative {
 
@@ -20,7 +27,7 @@ class TreeTraversalInIterative {
     fun solution(node: BinaryTreeNode) {
         var current: BinaryTreeNode? = node
         val stack = Stack<BinaryTreeNode>()
-        while (current != null || stack.isEmpty()) {
+        while (current != null || stack.isNotEmpty()) {
             // Reach the left most Node of the current Node
             while (current != null) {
                 stack.push(current)

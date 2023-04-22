@@ -1,6 +1,8 @@
 package com.example.algorithm
 
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.algorithm.array.CountAllPalindromeSubString
 import com.example.algorithm.array.CountSubArray
@@ -25,7 +27,8 @@ import com.example.algorithm.tree.FindBinaryTreeWidth
 import com.example.algorithm.tree.FindHeightOfBinaryTree
 import com.example.algorithm.tree.FindParentOfNode
 import com.example.algorithm.tree.FindParentOfTwoNode
-import com.example.algorithm.tree.NodeWithParent
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -60,6 +63,15 @@ class MainActivity : AppCompatActivity() {
     private val findParentOfNode by lazy { FindParentOfNode() }
     private val findParentOfTwoNode by lazy { FindParentOfTwoNode() }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun LocalDateTime.toUTCTimeZone(): LocalDateTime {
+        val zoneOffset = ZoneOffset.systemDefault().rules.getOffset(this)
+        return atZone(zoneOffset)
+            .withZoneSameInstant(ZoneOffset.systemDefault())
+            .toLocalDateTime()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -93,22 +105,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun testFindParentOfTwoNode() {
-        val head = NodeWithParent(
+        val head = BinaryTreeNode(
             1,
-            NodeWithParent(
+            BinaryTreeNode(
                 2,
-                NodeWithParent(4, left = NodeWithParent(6)),
-                NodeWithParent(5, right = NodeWithParent(7))
+                BinaryTreeNode(4, left = BinaryTreeNode(6)),
+                BinaryTreeNode(5, right = BinaryTreeNode(7))
             ),
-            NodeWithParent(3, right = NodeWithParent(8))
+            BinaryTreeNode(3, right = BinaryTreeNode(8))
         )
-        println(findParentOfTwoNode.solution(head, NodeWithParent(4), NodeWithParent(5)))
-        println(findParentOfTwoNode.solution(head, NodeWithParent(1), NodeWithParent(1)))
-        println(findParentOfTwoNode.solution(head, NodeWithParent(4), NodeWithParent(3)))
-        println(findParentOfTwoNode.solution(head, NodeWithParent(5), NodeWithParent(7)))
-        println(findParentOfTwoNode.solution(head, NodeWithParent(4), NodeWithParent(5)))
-        println(findParentOfTwoNode.solution(head, NodeWithParent(5), NodeWithParent(8)))
-        println(findParentOfTwoNode.solution(head, NodeWithParent(6), NodeWithParent(6)))
+        println(findParentOfTwoNode.solution(head, BinaryTreeNode(4), BinaryTreeNode(5)))
+        println(findParentOfTwoNode.solution(head, BinaryTreeNode(1), BinaryTreeNode(1)))
+        println(findParentOfTwoNode.solution(head, BinaryTreeNode(4), BinaryTreeNode(3)))
+        println(findParentOfTwoNode.solution(head, BinaryTreeNode(5), BinaryTreeNode(7)))
+        println(findParentOfTwoNode.solution(head, BinaryTreeNode(4), BinaryTreeNode(5)))
+        println(findParentOfTwoNode.solution(head, BinaryTreeNode(5), BinaryTreeNode(8)))
+        println(findParentOfTwoNode.solution(head, BinaryTreeNode(6), BinaryTreeNode(6)))
     }
 
     private fun testFindParentOfNode() {

@@ -69,12 +69,14 @@ class MainActivity : AppCompatActivity() {
     private val treeTraversalInIterative by lazy { TreeTraversalInIterative() }
     private val minimumParkingSpace by lazy { MinimumParkingSpace() }
     private val slidingWindowMaximum by lazy { SlidingWindowMaximum() }
+    private val validateIpAddress by lazy { ValidateIpAddress() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testSlidingWindowMaximum()
+        testValidateIpAddress()
+        //testSlidingWindowMaximum()
         //testMinimumParkingSpace()
         //testTreeTraversalInIterative()
         //testFindParentOfTwoNode()
@@ -103,6 +105,18 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testValidateIpAddress() {
+        println(validateIpAddress.solution("192.168.1.1"))
+        println(validateIpAddress.solution("192.168.1.0"))
+        println(validateIpAddress.solution("192.168.01.1"))
+        println(validateIpAddress.solution("192.168.1.00"))
+        println(validateIpAddress.solution("192.168@1.1"))
+        println(validateIpAddress.solution("2001:0db8:85a3:0000:0000:8a2e:0370:7334"))
+        println(validateIpAddress.solution("2001:db8:85a3:0:0:8A2E:0370:7334"))
+        println(validateIpAddress.solution("2001:0db8:85a3::8A2E:037j:7334"))
+        println(validateIpAddress.solution("02001:0db8:85a3:0000:0000:8a2e:0370:7334"))
     }
 
     private fun testSlidingWindowMaximum() {

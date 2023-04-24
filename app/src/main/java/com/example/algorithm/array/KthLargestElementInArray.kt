@@ -15,6 +15,10 @@ package com.example.algorithm.array
 class KthLargestElementInArray {
 
     /**
+     * Sort solution O(N * logN)
+     */
+
+    /**
      * O(k*n) Solution
      */
     fun solution(input: List<Int>, k: Int): Int? {
@@ -48,6 +52,6 @@ class KthLargestElementInArray {
             kElementPositions.add(kLargestIndex)
         }
 
-        return kSortedElements.last()
+        return kSortedElements.lastOrNull()
     }
 }

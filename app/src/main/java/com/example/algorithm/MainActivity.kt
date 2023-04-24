@@ -4,11 +4,14 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.algorithm.array.CarParking
 import com.example.algorithm.array.CountAllPalindromeSubString
 import com.example.algorithm.array.CountSubArray
 import com.example.algorithm.array.KthLargestElementInArray
 import com.example.algorithm.array.MinAbsoluteSumPair
 import com.example.algorithm.array.MinimumAbsoluteDifference
+import com.example.algorithm.array.MinimumParkingSpace
+import com.example.algorithm.array.SlidingWindowMaximum
 import com.example.algorithm.array.SwapToHaveLargestNumber
 import com.example.algorithm.hastable.LongestConsecutiveSequence
 import com.example.algorithm.hastable.PairWithGivenSum
@@ -64,21 +67,16 @@ class MainActivity : AppCompatActivity() {
     private val findParentOfNode by lazy { FindParentOfNode() }
     private val findParentOfTwoNode by lazy { FindParentOfTwoNode() }
     private val treeTraversalInIterative by lazy { TreeTraversalInIterative() }
+    private val minimumParkingSpace by lazy { MinimumParkingSpace() }
+    private val slidingWindowMaximum by lazy { SlidingWindowMaximum() }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun LocalDateTime.toUTCTimeZone(): LocalDateTime {
-        val zoneOffset = ZoneOffset.systemDefault().rules.getOffset(this)
-        return atZone(zoneOffset)
-            .withZoneSameInstant(ZoneOffset.systemDefault())
-            .toLocalDateTime()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testTreeTraversalInIterative()
+        testSlidingWindowMaximum()
+        //testMinimumParkingSpace()
+        //testTreeTraversalInIterative()
         //testFindParentOfTwoNode()
         //testFindParentOfNode()
         //testCountAllPalindromeSubString()
@@ -107,6 +105,35 @@ class MainActivity : AppCompatActivity() {
         //testMinAbsSumPair()
     }
 
+    private fun testSlidingWindowMaximum() {
+        println(slidingWindowMaximum.maxHeapSolution(listOf(1, 2, 3, 1, 4, 5, 2, 3, 6), 3))
+        println(slidingWindowMaximum.maxHeapSolution(listOf(8, 5, 10, 7, 9, 4, 15, 12, 90, 13), 4))
+    }
+
+    private fun testMinimumParkingSpace() {
+        println(
+            minimumParkingSpace.sortSolution(
+                listOf(
+                    CarParking(1012, 1136),
+                    CarParking(1317, 1417),
+                    CarParking(1015, 1020)
+                )
+            )
+        )
+        println(
+            minimumParkingSpace.sortSolution(
+                listOf(
+                    CarParking(1120, 1159),
+                    CarParking(1508, 1529),
+                    CarParking(1508, 1527),
+                    CarParking(1503, 1600),
+                    CarParking(1458, 1629),
+                    CarParking(1224, 1313)
+                )
+            )
+        )
+    }
+
     private fun testTreeTraversalInIterative() {
         val node = BinaryTreeNode(
             1,
@@ -130,13 +157,13 @@ class MainActivity : AppCompatActivity() {
             ),
             BinaryTreeNode(3, right = BinaryTreeNode(8))
         )
-        println(findParentOfTwoNode.solution(head, BinaryTreeNode(4), BinaryTreeNode(5)))
-        println(findParentOfTwoNode.solution(head, BinaryTreeNode(1), BinaryTreeNode(1)))
-        println(findParentOfTwoNode.solution(head, BinaryTreeNode(4), BinaryTreeNode(3)))
-        println(findParentOfTwoNode.solution(head, BinaryTreeNode(5), BinaryTreeNode(7)))
-        println(findParentOfTwoNode.solution(head, BinaryTreeNode(4), BinaryTreeNode(5)))
-        println(findParentOfTwoNode.solution(head, BinaryTreeNode(5), BinaryTreeNode(8)))
-        println(findParentOfTwoNode.solution(head, BinaryTreeNode(6), BinaryTreeNode(6)))
+        println(findParentOfTwoNode.solution2(head, BinaryTreeNode(4), BinaryTreeNode(5)))
+        println(findParentOfTwoNode.solution2(head, BinaryTreeNode(1), BinaryTreeNode(1)))
+        println(findParentOfTwoNode.solution2(head, BinaryTreeNode(4), BinaryTreeNode(3)))
+        println(findParentOfTwoNode.solution2(head, BinaryTreeNode(5), BinaryTreeNode(7)))
+        println(findParentOfTwoNode.solution2(head, BinaryTreeNode(4), BinaryTreeNode(5)))
+        println(findParentOfTwoNode.solution2(head, BinaryTreeNode(5), BinaryTreeNode(8)))
+        println(findParentOfTwoNode.solution2(head, BinaryTreeNode(6), BinaryTreeNode(6)))
     }
 
     private fun testFindParentOfNode() {

@@ -28,7 +28,7 @@ class FindBinaryTreeWidth {
      */
     fun solution(node: BinaryTreeNode): Int {
         val nodesCount = hashMapOf<Int, Int>()
-        addingLevelForEachNodes(node, 1, nodesCount)
+        countNodeOfAllLevels(node, 1, nodesCount)
 
         var nodeWidth = Integer.MIN_VALUE
         nodesCount.forEach {
@@ -40,7 +40,7 @@ class FindBinaryTreeWidth {
         return nodeWidth
     }
 
-    private fun addingLevelForEachNodes(
+    private fun countNodeOfAllLevels(
         node: BinaryTreeNode?,
         level: Int,
         nodesCount: HashMap<Int, Int>
@@ -49,8 +49,8 @@ class FindBinaryTreeWidth {
             return
         }
 
-        addingLevelForEachNodes(node.left, level + 1, nodesCount)
-        addingLevelForEachNodes(node.right, level + 1, nodesCount)
+        countNodeOfAllLevels(node.left, level + 1, nodesCount)
+        countNodeOfAllLevels(node.right, level + 1, nodesCount)
         if (nodesCount.contains(level)) {
             nodesCount[level] = nodesCount[level]!! + 1
         } else {

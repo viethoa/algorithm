@@ -45,9 +45,6 @@ class CountAllPalindromeSubString {
     }
 
     private fun isPalindromeString(subString: String): Boolean {
-        if (subString.length <= 1) {
-            return false
-        }
         return subString == subString.reversed()
     }
 }

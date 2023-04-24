@@ -34,7 +34,68 @@ package com.example.algorithm.tree
 class FindParentOfTwoNode {
 
     /**
-     * Solution
+     * Solution O(n), space O(n)
+     * - Find path from root of node1 and node2
+     * - Example:
+     *   + 4: 1 -> 2 -> 4
+     *   + 5: 1 -> 2 -> 5
+     * - Find the same node of these 2 paths, it will be lowest parent of those 2 nodes
+     */
+    fun solution2(
+        node: BinaryTreeNode,
+        node1: BinaryTreeNode,
+        node2: BinaryTreeNode
+    ): Int? {
+        val path1 = mutableListOf<Int>()
+        val ableToFindPath1 = findPath(node, node1, path1)
+        if (!ableToFindPath1 || path1.isEmpty()) {
+            return null
+        }
+        val path2 = mutableListOf<Int>()
+        val ableToFindPath2 = findPath(node, node2, path2)
+        if (!ableToFindPath2 || path2.isEmpty()) {
+            return null
+        }
+        val n = Math.min(path1.size, path2.size) - 1
+        for (i in n downTo 0) {
+            if (path1[i] == path2[i] &&
+                path1[i] != node1.value &&
+                path2[i] != node2.value
+            ) {
+                return path1[i]
+            }
+        }
+
+        return null
+    }
+
+    private fun findPath(
+        root: BinaryTreeNode?,
+        node: BinaryTreeNode,
+        path: MutableList<Int>
+    ): Boolean {
+        if (root == null) {
+            return false
+        }
+        // Store this node
+        // The node will be removed later if not belong to the path from root to n.
+        path.add(root.value)
+
+        if (root.value == node.value ||
+            findPath(root.left, node, path) ||
+            findPath(root.right, node, path)
+        ) {
+            return true
+        }
+
+        // The last node was added is not belong to the path from root to n,
+        // So remove it.
+        path.removeLast()
+        return false
+    }
+
+    /**
+     * Solution O(n*k) (k: max height of node1 and node2)
      * - Set the parent for each node
      * - Find the parent of 2 require nodes, if they are not the same node then
      * get its parent and repeat finding the parent of them until they are same node.

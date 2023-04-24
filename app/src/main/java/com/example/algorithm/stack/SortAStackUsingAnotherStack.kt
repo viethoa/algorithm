@@ -30,9 +30,9 @@ class SortAStackUsingAnotherStack {
         }
 
         val outputStack = Stack<Int>()
-        while (!input.isEmpty()) {
+        while (input.isNotEmpty()) {
             val element = input.pop()
-            while (!outputStack.isEmpty() && outputStack.peek() > element) {
+            while (outputStack.isNotEmpty() && outputStack.peek() > element) {
                 input.push(outputStack.pop())
             }
             outputStack.push(element)

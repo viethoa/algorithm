@@ -1,8 +1,6 @@
 package com.example.algorithm
 
-import android.os.Build
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.algorithm.array.CarParking
 import com.example.algorithm.array.CountAllPalindromeSubString
@@ -13,6 +11,7 @@ import com.example.algorithm.array.MinimumAbsoluteDifference
 import com.example.algorithm.array.MinimumParkingSpace
 import com.example.algorithm.array.SlidingWindowMaximum
 import com.example.algorithm.array.SwapToHaveLargestNumber
+import com.example.algorithm.graph.Graph
 import com.example.algorithm.hastable.LongestConsecutiveSequence
 import com.example.algorithm.hastable.PairWithGivenSum
 import com.example.algorithm.hastable.SumThreeNumberEqualToZero
@@ -31,8 +30,6 @@ import com.example.algorithm.tree.FindHeightOfBinaryTree
 import com.example.algorithm.tree.FindParentOfNode
 import com.example.algorithm.tree.FindParentOfTwoNode
 import com.example.algorithm.tree.TreeTraversalInIterative
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -75,7 +72,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testValidateIpAddress()
+        testDetectCircleInDirectedGraph()
+        //testValidateIpAddress()
         //testSlidingWindowMaximum()
         //testMinimumParkingSpace()
         //testTreeTraversalInIterative()
@@ -105,6 +103,25 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testDetectCircleInDirectedGraph() {
+        var graph = Graph(4).apply {
+            addEdge(0, 1)
+            addEdge(0, 2)
+            addEdge(1, 2)
+            addEdge(2, 0)
+            addEdge(2, 3)
+            addEdge(3, 3)
+        }
+        println("Detect Circle In Directed Graph ${graph.isCircle()}")
+        graph = Graph(4).apply {
+            addEdge(0, 1)
+            addEdge(0, 2)
+            addEdge(1, 2)
+            addEdge(2, 3)
+        }
+        println("Detect Circle In Directed Graph ${graph.isCircle()}")
     }
 
     private fun testValidateIpAddress() {

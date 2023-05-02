@@ -25,10 +25,6 @@ class FindHeightOfBinaryTree {
      * 3. Return the largest height
      */
     fun execute(node: BinaryTreeNode): Int {
-        if (node.left == null && node.right == null) {
-            return 1
-        }
-
         return findBinaryTreeHeight(node, 1)
     }
 

@@ -15,7 +15,7 @@ import com.example.algorithm.graph.Graph
 import com.example.algorithm.hastable.LongestConsecutiveSequence
 import com.example.algorithm.hastable.PairWithGivenSum
 import com.example.algorithm.hastable.SumThreeNumberEqualToZero
-import com.example.algorithm.hastable.UniqueCharacterInString
+import com.example.algorithm.hastable.FirstUniqueCharacterInString
 import com.example.algorithm.hastable.ValidAnagram
 import com.example.algorithm.linkedlist.*
 import com.example.algorithm.queue.QueueRemoval
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
      * Array algorithm
      */
     private val minAbsoluteSumPair by lazy { MinAbsoluteSumPair() }
-    private val uniqueCharacterInString by lazy { UniqueCharacterInString() }
+    private val uniqueCharacterInString by lazy { FirstUniqueCharacterInString() }
     private val countSubArray by lazy { CountSubArray() }
     private val minimumAbsoluteDifference by lazy { MinimumAbsoluteDifference() }
     private val reverseStack by lazy { ReverseStackUsingRecursion() }

@@ -20,7 +20,7 @@ package com.example.algorithm.array
 class CountAllPalindromeSubString {
 
     /**
-     * Solution O(n^2)
+     * Solution O(n(n+1)/2)
      * Find all possible substring and check any of them is palindrome
      * - Not count 1 character
      * - Count from 2 characters to [input.length] characters

@@ -65,7 +65,10 @@ class SlidingWindowMaximum {
 
 
     /**
-     * Solution 1: O(N*K)
+     * Solution 1: O((n-k)*k)
+     *  - K = 1 => O(n)
+     *  - K = n => O(n)
+     *  - k != n => O((n-k)*k)
      * 1. Loop array
      * 2. Loop K time to find max number
      */

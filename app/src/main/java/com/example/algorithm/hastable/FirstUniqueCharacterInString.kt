@@ -12,7 +12,7 @@ package com.example.algorithm.hastable
  * Output: 1
  * Explanation: 'f' is the first non-repeating character in the string s. Hence, the output is index 1.
  */
-class UniqueCharacterInString {
+class FirstUniqueCharacterInString {
 
     /**
      * Time complexity: O(n)

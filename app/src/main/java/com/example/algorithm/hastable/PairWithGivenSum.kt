@@ -38,8 +38,8 @@ class PairWithGivenSum {
         input.forEach { element ->
             val difference = sum - element
             if (map.contains(difference)) {
-                val mapElement = map[difference]
-                for (i in 0..mapElement!!) {
+                val count = map[difference]
+                for (i in 0..count!!) {
                     output.add(Pair(element, difference))
                 }
                 map.remove(difference) /* Need to remove to avoid duplicated */

@@ -6,12 +6,17 @@ import com.example.algorithm.array.CarParking
 import com.example.algorithm.array.CountAllPalindromeSubString
 import com.example.algorithm.array.CountSubArray
 import com.example.algorithm.array.KthLargestElementInArray
+import com.example.algorithm.array.LongestRepeatedSubString
+import com.example.algorithm.array.MaximumSubArray
 import com.example.algorithm.array.MinAbsoluteSumPair
 import com.example.algorithm.array.MinimumAbsoluteDifference
 import com.example.algorithm.array.MinimumParkingSpace
 import com.example.algorithm.array.SlidingWindowMaximum
 import com.example.algorithm.array.SwapToHaveLargestNumber
+import com.example.algorithm.array.ValidPalindrome
+import com.example.algorithm.coroutine.TestFlowWithMultipleCollectors
 import com.example.algorithm.graph.Graph
+import com.example.algorithm.hastable.DetectLoopInALinkedList
 import com.example.algorithm.hastable.LongestConsecutiveSequence
 import com.example.algorithm.hastable.PairWithGivenSum
 import com.example.algorithm.hastable.SumThreeNumberEqualToZero
@@ -67,12 +72,26 @@ class MainActivity : AppCompatActivity() {
     private val minimumParkingSpace by lazy { MinimumParkingSpace() }
     private val slidingWindowMaximum by lazy { SlidingWindowMaximum() }
     private val validateIpAddress by lazy { ValidateIpAddress() }
+    private val longestRepeatedSubString by lazy { LongestRepeatedSubString() }
+    private val validPalindrome by lazy { ValidPalindrome() }
+    private val maximumSubArray by lazy { MaximumSubArray() }
+    private val detectLoopInALinkedList by lazy { DetectLoopInALinkedList() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testDetectCircleInDirectedGraph()
+        // https://www.techinterviewhandbook.org/coding-interview-study-plan/
+
+        MainActivityViewModel().test()
+        MainActivityViewModel2().test()
+        MainActivityViewModel3().test()
+
+        //testDetectLoopInALinedList()
+        //testMaximumSubArray()
+        //testValidPalindrome()
+        //testLongestRepeatedSubString()
+        //testDetectCircleInDirectedGraph()
         //testValidateIpAddress()
         //testSlidingWindowMaximum()
         //testMinimumParkingSpace()
@@ -103,6 +122,40 @@ class MainActivity : AppCompatActivity() {
         //testCountSubArray()
         //testUniqueCharacterInString()
         //testMinAbsSumPair()
+    }
+
+    private fun testDetectLoopInALinedList() {
+        val node = Node(0)
+        println("detect loop in linked-List ${detectLoopInALinkedList.solution(node)}")
+        val node1 = Node(1)
+        val head1 = Node(2, next = node1)
+        head1.next?.next = head1
+        println("detect loop in linked-List ${detectLoopInALinkedList.solution(head1)}")
+        val node2 = Node(2, Node(3, Node(4)))
+        node2.next?.next?.next = node2
+        val head2 = Node(1, node2)
+        println("detect loop in linked-List ${detectLoopInALinkedList.solution(head2)}")
+    }
+
+    private fun testMaximumSubArray() {
+        println("Maximum Sub-Array ${maximumSubArray.solution(listOf(-2,1,-3,4,-1,2,1,-5,4))}")
+        println("Maximum Sub-Array ${maximumSubArray.solution(listOf(5,4,-1,7,8))}")
+        println("Maximum Sub-Array ${maximumSubArray.solution(listOf(1))}")
+    }
+
+    private fun testValidPalindrome() {
+        println("Valid Palindrome ${validPalindrome.isValidPalindrome("A man, a plan, a canal: Panama")}")
+        println("Valid Palindrome ${validPalindrome.isValidPalindrome("race a car")}")
+        println("Valid Palindrome ${validPalindrome.isValidPalindrome("")}")
+    }
+
+    private fun testLongestRepeatedSubString() {
+        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("geaksfgeekstgeeks")}")
+        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("aabaabaaba")}")
+        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("aaaaaaaaaaa")}")
+        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("banana")}")
+        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("abaaba")}")
+        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("123456789")}")
     }
 
     private fun testDetectCircleInDirectedGraph() {
@@ -160,6 +213,17 @@ class MainActivity : AppCompatActivity() {
                     CarParking(1503, 1600),
                     CarParking(1458, 1629),
                     CarParking(1224, 1313)
+                )
+            )
+        )
+        println(
+            minimumParkingSpace.sortSolution(
+                listOf(
+                    CarParking(1000, 1200),
+                    CarParking(1005, 1010),
+                    CarParking(1005, 1200),
+                    CarParking(1010, 1200),
+                    CarParking(1015, 1200)
                 )
             )
         )

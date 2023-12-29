@@ -29,7 +29,7 @@ package com.example.algorithm.hastable
 class SumThreeNumberEqualToZero {
 
     /**
-     * Solution: O(n(n+1)/2) & O(n) Space Complexity
+     * Solution: O(n^2) & O(n) Space Complexity
      * - The idea is HashSet should contain only number which is not
      * input[i] and input[j].
      */

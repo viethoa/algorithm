@@ -35,7 +35,7 @@ class RotationByKPosition {
             return input
         }
 
-        val finalK = input.size % k
+        val finalK = k % input.size
         val output = arrayListOf<Int>()
         val kPositionFromTheEnd = input.size - finalK
         for (i in kPositionFromTheEnd until input.size) {

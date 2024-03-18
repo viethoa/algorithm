@@ -48,22 +48,23 @@ class MinimumParkingSpace {
             parkings.add(ParkingData(it.departureTime, false))
         }
 
-        val sortedParkings = parkings.sortedBy { it.time }
-        var maxContinuousEntry = 0
         var count = 0
-        sortedParkings.forEach {
-            when (it.isArrival) {
-                true -> {
-                    count += 1
-                }
-                false -> {
-                    if (count > maxContinuousEntry) {
-                        maxContinuousEntry = count
+        var maxContinuousEntry = 0
+        parkings
+            .sortedBy { it.time }
+            .forEach {
+                when (it.isArrival) {
+                    true -> {
+                        count += 1
                     }
-                    count = 0
+                    false -> {
+                        if (count > maxContinuousEntry) {
+                            maxContinuousEntry = count
+                        }
+                        count = 0
+                    }
                 }
             }
-        }
 
         return maxContinuousEntry
     }

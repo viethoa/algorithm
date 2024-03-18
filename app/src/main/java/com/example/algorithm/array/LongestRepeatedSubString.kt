@@ -21,39 +21,36 @@ package com.example.algorithm.array
 class LongestRepeatedSubString {
 
     /**
-     * Complexity: O(n^2/2)
+     * Time Complexity: O((n^2)/2)
+     * Space complexity: O(1)
      */
-    fun execute(input: String): String {
-        val haftLength = input.length / 2
-        var longestSubString = ""
+    fun execute(input: String): String? {
+        val n = input.length
+        val halfInputLength = input.length / 2
+        var substringLength = 1
+        var longestRepeatedSubString: String? = null
 
-        for (subLength in 1..haftLength) {
-            val newLength = input.length - subLength
-            for (i in 0..newLength) {
-                val subString = input.substring(i, i + subLength)
-                val (leftRemainString, rightRemainString) = getRemainString(input, i, subLength)
-                if (leftRemainString.contains(subString) || rightRemainString.contains(subString)) {
-                    if (subString.length > longestSubString.length) {
-                        longestSubString = subString
+        while (substringLength <= halfInputLength) {
+            for (i in 0 until (n - substringLength)) {
+                val substring = input.substring(i, i + substringLength)
+                val rightLeftSubstring = input.substring(i + substringLength, n)
+                // Only need to check with Right-Leftover substring,
+                // Because the Left-leftover substring already check at the begin when looping
+                if (rightLeftSubstring.contains(substring)) {
+                    when (longestRepeatedSubString) {
+                        null -> longestRepeatedSubString = substring
+                        else -> {
+                            if (longestRepeatedSubString.length < substring.length) {
+                                longestRepeatedSubString = substring
+                            }
+                        }
                     }
                 }
             }
+
+            substringLength += 1
         }
 
-        return longestSubString
-    }
-
-    private fun getRemainString(input: String, i: Int, subLength: Int): Pair<String, String> {
-        if (i == 0) {
-            val restOfString = input.substring(subLength, input.length)
-            return Pair("", restOfString)
-        }
-        if (i + subLength == input.length) {
-            val restOfString = input.substring(0, input.length - subLength)
-            return Pair(restOfString, "")
-        }
-        val leftSubString = input.substring(0, i)
-        val rightSubString = input.substring(i + subLength, input.length)
-        return Pair(leftSubString, rightSubString)
+        return longestRepeatedSubString
     }
 }

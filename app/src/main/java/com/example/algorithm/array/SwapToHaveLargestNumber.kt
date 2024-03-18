@@ -13,49 +13,69 @@ package com.example.algorithm.array
  */
 class SwapToHaveLargestNumber {
 
+    fun execute() {
+        println("Loop Solution")
+        println(useLoopSolution(listOf(1, 9, 7, 3)))
+        println(useLoopSolution(listOf(9, 2, 8, 8, 3)))
+        println(useLoopSolution(listOf(9, 8, 3, 2)))
+        println("Sort Solution")
+        println(useSortSolution(1973))
+        println(useSortSolution(92883))
+        println(useSortSolution(9832))
+    }
+
     /**
      * O(nlog(n)) solution
      * - The Quick Sort is O(nlog(n))
      */
-    fun useSortSolution(input: List<Int>): List<Int> {
-        if (input.isEmpty()) {
+    private fun useSortSolution(input: Int): Int {
+        // Parse input to list of Character Integers
+        val numbers = arrayListOf<Int>()
+        input
+            .toString()
+            .forEach { character ->
+                numbers.add(character.toString().toInt())
+            }
+
+        // Find first position need to swap
+        val sortedNumbers = numbers.sortedDescending()
+        var firstPosition = -1
+        for (i in 0 until numbers.size) {
+            if (numbers[i] != sortedNumbers[i]) {
+                firstPosition = i
+                break
+            }
+        }
+        // The input already a largest number, no need to do any swap
+        if (firstPosition == -1) {
             return input
         }
 
-        var swapJValue: Int? = null
-        var swapIPosition: Int? = null
-        var swapJPosition: Int? = null
-        val mutableList = input.toMutableList()
-        val sortedList = input.sortedDescending()
-        for (i in mutableList.indices) {
-            if (mutableList[i] < sortedList[i]) {
-                swapIPosition = i
-                swapJValue = sortedList[i]
+        // Find the second position for swapping
+        var secondPosition = -1
+        for (i in 0 until numbers.size) {
+            if (sortedNumbers[firstPosition] == numbers[i]) {
+                secondPosition = i
                 break
             }
         }
 
-        // The origin input already a largest number
-        if (swapIPosition == null) {
-            return mutableList
-        }
-
-        // Find swapJPosition
-        for (i in mutableList.indices) {
-            if (mutableList[i] == swapJValue) {
-                swapJPosition = i
-                break
+        // Perform swap
+        val temp = numbers[firstPosition]
+        numbers[firstPosition] = sortedNumbers[firstPosition]
+        numbers[secondPosition] = temp
+        return numbers
+            .map { it.toString() }
+            .reduce { acc, next ->
+                "$acc$next"
             }
-        }
-
-        swapValue(swapIPosition, swapJPosition!!, mutableList)
-        return mutableList
+            .toInt()
     }
 
     /**
      * O(n^2) solution
      */
-    fun useLoopSolution(input: List<Int>): List<Int> {
+    private fun useLoopSolution(input: List<Int>): List<Int> {
         if (input.isEmpty()) {
             return input
         }

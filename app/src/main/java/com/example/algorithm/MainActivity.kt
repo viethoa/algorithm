@@ -1,6 +1,7 @@
 package com.example.algorithm
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.algorithm.array.CarParking
 import com.example.algorithm.array.CountAllPalindromeSubString
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Array algorithm
+     * https://www.hackerrank.com/domains/algorithms?utm_source=hrwCandidateFeedback
      */
     private val minAbsoluteSumPair by lazy { MinAbsoluteSumPair() }
     private val uniqueCharacterInString by lazy { FirstUniqueCharacterInString() }
@@ -82,10 +84,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // https://www.techinterviewhandbook.org/coding-interview-study-plan/
+        //MainActivityViewModel().test() /* Test multiple subscriber into the same ShareFlow */
 
-        MainActivityViewModel().test()
-        MainActivityViewModel2().test()
-        MainActivityViewModel3().test()
+        // Character `a` = 01100001 = 0*2^7 + 1*2^6 + 1*2^5 + ... 1*2^0 = 97
 
         //testDetectLoopInALinedList()
         //testMaximumSubArray()
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         //testTreeTraversalInIterative()
         //testFindParentOfTwoNode()
         //testFindParentOfNode()
-        //testCountAllPalindromeSubString()
+        testCountAllPalindromeSubString()
         //testFindBinaryTreeWidth()
         //testKthLargestElementInArray()
         //testSumThreeNumberEqualToZero()
@@ -276,7 +277,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun testCountAllPalindromeSubString() {
-        println(countAllPalindromeSubString.solution("aa"))
+        println(countAllPalindromeSubString.solution("ab"))
         println(countAllPalindromeSubString.solution("bbb"))
         println(countAllPalindromeSubString.solution("abaab"))
         println(countAllPalindromeSubString.solution("abbaeae"))
@@ -317,17 +318,6 @@ class MainActivity : AppCompatActivity() {
         println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(0, -3, 5, 10, 14, -7, -6, 2, 1)))
         println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(3, 3, -2, 10, -7, 3, -6, 1)))
         println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(0, 1, 5, 10, -7, 3, 8, 1)))
-    }
-
-    private fun testSwapToHaveLargestNumber() {
-        println("Loop Solution")
-        println(swapToHaveLargestNumber.useLoopSolution(listOf(1, 9, 7, 3)))
-        println(swapToHaveLargestNumber.useLoopSolution(listOf(9, 2, 8, 8, 3)))
-        println(swapToHaveLargestNumber.useLoopSolution(listOf(9, 8, 3, 2)))
-        println("Sort Solution")
-        println(swapToHaveLargestNumber.useSortSolution(listOf(1, 9, 7, 3)))
-        println(swapToHaveLargestNumber.useSortSolution(listOf(9, 2, 8, 8, 3)))
-        println(swapToHaveLargestNumber.useSortSolution(listOf(9, 8, 3, 2)))
     }
 
     private fun testReverseKNodeFromHead() {

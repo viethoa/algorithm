@@ -30,21 +30,33 @@ class CountAllPalindromeSubString {
             return 0
         }
 
+        var subString = 2
         val palindromes = mutableListOf<String>()
-        for (i in 2..input.length) {
-            for (j in 0..input.length - i) {
-                val subString = input.substring(j, j + i)
-                if (isPalindromeString(subString)) {
-                    palindromes.add(subString)
+        while (subString <= input.length) {
+            for (i in 0..input.length - subString) {
+                val temp = input.substring(i, i + subString)
+                if (temp.isPalindromeString()) {
+                    palindromes.add(temp)
                 }
             }
+            subString += 1
         }
+
+        // Second solution
+//        for (i in 2..input.length) {
+//            for (j in 0..input.length - i) {
+//                val subString = input.substring(j, j + i)
+//                if (isPalindromeString(subString)) {
+//                    palindromes.add(subString)
+//                }
+//            }
+//        }
 
         println(palindromes)
         return palindromes.size
     }
+}
 
-    private fun isPalindromeString(subString: String): Boolean {
-        return subString == subString.reversed()
-    }
+private fun String.isPalindromeString(): Boolean {
+    return this == this.reversed()
 }

@@ -28,13 +28,6 @@ class RotationByKPosition {
      * 4. Copy temp array into original array
      */
     fun execute(input: List<Int>, k: Int): List<Int> {
-        if (input.isEmpty()) {
-            return input
-        }
-        if (k <= 0) {
-            return input
-        }
-
         val finalK = k % input.size
         val output = arrayListOf<Int>()
         val kPositionFromTheEnd = input.size - finalK

@@ -25,6 +25,9 @@ class ReverseKElementOfQueue {
      * 1. Using recursive to revert k element, but added into rear
      * 2. Loop N = Size - K times to dequeue & enqueue n elements from the Front to the rear
      * 3. Now we got the reverted K elements move the front, and N elements move back to the rear
+     *
+     * // revertKElement:   6, 7, 8, 9, 10, 5, 4, 3, 2, 1
+     * // Switch to bottom: 5, 4, 3, 2, 1, 6, 7, 8, 9, 10
      */
     fun execute(input: Queue<Int>, k: Int) {
         if (k <= 0) {
@@ -36,6 +39,7 @@ class ReverseKElementOfQueue {
             finalK = input.size
         }
 
+        // Switch the rest item into bottom
         revertKElement(input, finalK)
         val n = input.size - finalK
         for (i in 1..n) {

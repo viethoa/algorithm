@@ -1,7 +1,6 @@
 package com.example.algorithm
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.algorithm.array.CarParking
 import com.example.algorithm.array.CountAllPalindromeSubString
@@ -12,10 +11,11 @@ import com.example.algorithm.array.MaximumSubArray
 import com.example.algorithm.array.MinAbsoluteSumPair
 import com.example.algorithm.array.MinimumAbsoluteDifference
 import com.example.algorithm.array.MinimumParkingSpace
+import com.example.algorithm.array.SearchInRotatedSortedArray
 import com.example.algorithm.array.SlidingWindowMaximum
 import com.example.algorithm.array.SwapToHaveLargestNumber
 import com.example.algorithm.array.ValidPalindrome
-import com.example.algorithm.coroutine.TestFlowWithMultipleCollectors
+import com.example.algorithm.queue.BFS
 import com.example.algorithm.graph.Graph
 import com.example.algorithm.hastable.DetectLoopInALinkedList
 import com.example.algorithm.hastable.LongestConsecutiveSequence
@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
     private val reverseKNodeFromHead by lazy { ReverseKNodeFromHead() }
     private val swapToHaveLargestNumber by lazy { SwapToHaveLargestNumber() }
     private val sumThreeNumberEqualToZero by lazy { SumThreeNumberEqualToZero() }
-    private val kthLargestElementInArray by lazy { KthLargestElementInArray() }
     private val findBinaryTreeWidth by lazy { FindBinaryTreeWidth() }
     private val countAllPalindromeSubString by lazy { CountAllPalindromeSubString() }
     private val findParentOfNode by lazy { FindParentOfNode() }
@@ -78,28 +77,34 @@ class MainActivity : AppCompatActivity() {
     private val validPalindrome by lazy { ValidPalindrome() }
     private val maximumSubArray by lazy { MaximumSubArray() }
     private val detectLoopInALinkedList by lazy { DetectLoopInALinkedList() }
+    private val detectCircleInDirectedGraph by lazy { Graph() }
+    private val breadthFirstSearch by lazy { BFS() }
+    private val binarySearch by lazy { SearchInRotatedSortedArray() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // https://www.techinterviewhandbook.org/coding-interview-study-plan/
-        //MainActivityViewModel().test() /* Test multiple subscriber into the same ShareFlow */
-
         // Character `a` = 01100001 = 0*2^7 + 1*2^6 + 1*2^5 + ... 1*2^0 = 97
 
+        //MainActivityViewModel().test() /* Test multiple subscriber into the same ShareFlow */
+
+        binarySearch.execute()
+        //breadthFirstSearch.displayGraph()
+        //detectCircleInDirectedGraph.execute()
+        //CoroutineCloseableWithDeferred().execute()
         //testDetectLoopInALinedList()
         //testMaximumSubArray()
         //testValidPalindrome()
         //testLongestRepeatedSubString()
-        //testDetectCircleInDirectedGraph()
         //testValidateIpAddress()
         //testSlidingWindowMaximum()
         //testMinimumParkingSpace()
         //testTreeTraversalInIterative()
         //testFindParentOfTwoNode()
         //testFindParentOfNode()
-        testCountAllPalindromeSubString()
+        //testCountAllPalindromeSubString()
         //testFindBinaryTreeWidth()
         //testKthLargestElementInArray()
         //testSumThreeNumberEqualToZero()
@@ -157,25 +162,6 @@ class MainActivity : AppCompatActivity() {
         println("LongestRepeatedSubString ${longestRepeatedSubString.execute("banana")}")
         println("LongestRepeatedSubString ${longestRepeatedSubString.execute("abaaba")}")
         println("LongestRepeatedSubString ${longestRepeatedSubString.execute("123456789")}")
-    }
-
-    private fun testDetectCircleInDirectedGraph() {
-        var graph = Graph(4).apply {
-            addEdge(0, 1)
-            addEdge(0, 2)
-            addEdge(1, 2)
-            addEdge(2, 0)
-            addEdge(2, 3)
-            addEdge(3, 3)
-        }
-        println("Detect Circle In Directed Graph ${graph.isCircle()}")
-        graph = Graph(4).apply {
-            addEdge(0, 1)
-            addEdge(0, 2)
-            addEdge(1, 2)
-            addEdge(2, 3)
-        }
-        println("Detect Circle In Directed Graph ${graph.isCircle()}")
     }
 
     private fun testValidateIpAddress() {
@@ -294,11 +280,6 @@ class MainActivity : AppCompatActivity() {
             BinaryTreeNode(3, right = BinaryTreeNode(8))
         )
         println(findBinaryTreeWidth.solution(head))
-    }
-
-    private fun testKthLargestElementInArray() {
-        println(kthLargestElementInArray.solution(listOf(3, 2, 1, 5, 6, 4), 2))
-        println(kthLargestElementInArray.solution(listOf(6, 2, 3, 1, 2, 4, 5, 5, 6), 4))
     }
 
     private fun testSumThreeNumberEqualToZero() {

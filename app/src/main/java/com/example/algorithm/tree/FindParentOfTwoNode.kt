@@ -58,10 +58,7 @@ class FindParentOfTwoNode {
         }
         val n = Math.min(path1.size, path2.size) - 1
         for (i in n downTo 0) {
-            if (path1[i] == path2[i] &&
-                path1[i] != node1.value &&
-                path2[i] != node2.value
-            ) {
+            if (path1[i] == path2[i] && path1[i] != node1.value && path2[i] != node2.value) {
                 return path1[i]
             }
         }
@@ -81,9 +78,9 @@ class FindParentOfTwoNode {
         // The node will be removed later if not belong to the path from root to n.
         path.add(root.value)
 
-        if (root.value == node.value ||
-            findPath(root.left, node, path) ||
-            findPath(root.right, node, path)
+        if (root.value == node.value
+            || findPath(root.left, node, path)
+            || findPath(root.right, node, path)
         ) {
             return true
         }

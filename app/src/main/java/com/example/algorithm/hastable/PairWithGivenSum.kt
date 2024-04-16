@@ -16,6 +16,10 @@ package com.example.algorithm.hastable
  * Input: arr[] = {1, 5, 3, 3, 3},
  * sum = 6
  * Output: (1, 5) (3, 3) (3, 3) (3, 3)
+ *
+ * Input: arr[] = {1, 5, 5, 1, 3},
+ * sum = 6
+ * Output: (1, 5) (1, 5) (5, 1) (5, 1)
  */
 class PairWithGivenSum {
 
@@ -24,29 +28,24 @@ class PairWithGivenSum {
             return emptyList()
         }
 
-        // Add all item into map
-        val map = hashMapOf<Int, Int>()
+        val result = arrayListOf<Pair<Int, Int>>()
+        val hashMap = hashMapOf<Int, Int>()
         input.forEach { element ->
-            if (map.containsKey(element)) {
-                map[element] = map[element]!! + 1
-            } else {
-                map[element] = 0
-            }
-        }
-
-        val output = arrayListOf<Pair<Int, Int>>()
-        input.forEach { element ->
-            val difference = sum - element
-            if (map.contains(difference)) {
-                val count = map[difference]
-                for (i in 0..count!!) {
-                    output.add(Pair(element, difference))
+            val diff = sum - element
+            if (hashMap.contains(diff)) {
+                val count = hashMap[diff]!!
+                for (i in 0 until count) {
+                    result.add(Pair(diff, element))
                 }
-                map.remove(difference) /* Need to remove to avoid duplicated */
-                map.remove(element) /* Need to remove to avoid duplicated */
+            }
+
+            if (hashMap.contains(element)) {
+                hashMap[element] = hashMap[element]!! + 1
+            } else {
+                hashMap[element] = 1
             }
         }
 
-        return output
+        return result
     }
 }

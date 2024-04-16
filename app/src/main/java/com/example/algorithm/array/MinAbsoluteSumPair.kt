@@ -18,8 +18,8 @@ class MinAbsoluteSumPair {
      * 2. Run one more for, check sum of arr[i-1] and arr[i]
      * if their absolute sum is less than min update min with their absolute value.
      *
-     * Time Complexity: O(nlogn) (Quick Sort) (the complexity depend on Sort method)
-     * Auxiliary Space : O(1)
+     * Time: O(N*logN) (Quick Sort) (the complexity depend on Sort method)
+     * Space : O(n) (Quick Sort need O(n) space???)
      */
     fun minAbsSumPairOptimise(array: List<Int>): Pair<Int, Int> {
         if (array.isEmpty() || array.size < 2) {

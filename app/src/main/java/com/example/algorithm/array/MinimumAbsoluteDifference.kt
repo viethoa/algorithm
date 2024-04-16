@@ -13,17 +13,17 @@ import kotlin.math.abs
  * - j - i equals to the minimum absolute difference of any two elements in arr[].
  *
  * Example 1
- * Input: arr[] = [5, 3, 2, 4]
+ * Input: [5, 3, 2, 4] => [2, 3, 4, 5]
  * Output: [[2, 3],[3, 4],[4, 5]]
  * Explanation: The minimum absolute difference is 1. List all pairs with difference equal to 1 in ascending order.
  *
  * Example 2
- * Input: arr[] = [2, 4, 7, 13, 17]
+ * Input: [2, 4, 7, 13, 17]
  * Output: [[2, 4]]
  * Explanation: The minimum absolute difference is 2 between the first two elements.
  *
  * Example 3
- * Input: arr[] = [1, 7, -12, 22, -8, -16, 18]
+ * Input: arr[] = [1, 7, -12, 22, -8, -16, 18] => [-16, -12, -8, 1, 7, 18, 22]
  * Output: [[-12, -8],[-12, -16],[22, 18]]
  * Explanation: All these pairs have the same minimum absolute difference.
  */
@@ -35,19 +35,13 @@ class MinimumAbsoluteDifference {
      * 2. Find minimum absolute diff number
      * 2. Find the pair which right minimum
      *
-     * Time Complexity: O(nlogn) (Quick Sort) (the complexity depend on Sort method)
-     * Auxiliary Space : O(n/2)
+     * Time: O(N*logN) (Quick Sort)
+     * Space: O(n) (Quick Sort is O(n) if not wrong)
      */
     fun execute(input: List<Int>): List<Pair<Int, Int>> {
-        if (input.isEmpty()) {
-            return emptyList()
-        }
-        if (input.size == 1) {
-            return emptyList()
-        }
-
         //val sortedArray = input.sorted()
-        val sortedArray = selectionSort(input.toTypedArray())
+        //val sortedArray = selectionSort(input.toTypedArray())
+        val sortedArray = input.sorted()
         var minAbsNumber = Int.MAX_VALUE
         for (i in 1 until sortedArray.size) {
             val min = abs(sortedArray[i] - sortedArray[i - 1])
@@ -84,12 +78,6 @@ class MinimumAbsoluteDifference {
     }
 
     private fun permutation(input: Array<Int>, i: Int, j: Int) {
-        if (i < 0 || j < 0) {
-            return
-        }
-        if (i >= input.size || j >= input.size) {
-            return
-        }
         val temp = input[i]
         input[i] = input[j]
         input[j] = temp

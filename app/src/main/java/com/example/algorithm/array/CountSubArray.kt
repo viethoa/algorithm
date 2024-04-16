@@ -29,38 +29,18 @@ class CountSubArray {
      * Auxiliary Space: O(1)
      */
     fun execute(input: List<Int>, x: Int): Int {
-        if (input.isEmpty()) {
-            return 0
-        }
-
         var count = 0
-        var begin = -1
-        var end = -1
-        input.forEachIndexed { index, element ->
+        var consecutive = 0
+        input.forEach { element ->
             if (element <= x) {
-                if (begin == -1) {
-                    begin = index
-                    end = index
-                } else {
-                    end = index
-                }
+                consecutive += 1
             } else {
-                if (begin != -1 && end != -1) {
-                    count += calculateSubString(begin, end)
-                }
-                begin = -1
-                end = -1
+                count += consecutive * (consecutive + 1) / 2
+                consecutive = 0
             }
         }
-        if (begin != -1 && end != -1) {
-            count += calculateSubString(begin, end)
-        }
 
+        count += consecutive * (consecutive + 1) / 2
         return count
-    }
-
-    private fun calculateSubString(begin: Int, end: Int): Int {
-        val n = (end + 1) - begin
-        return n * (n + 1) / 2
     }
 }

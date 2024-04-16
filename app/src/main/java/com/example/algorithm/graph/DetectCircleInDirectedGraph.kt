@@ -2,42 +2,53 @@ package com.example.algorithm.graph
 
 /**
  * Given the root of a Directed graph, The task is to check whether the graph contains a cycle or not.
- *  - https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+ *  - https://www.geeksforgeeks.org/detect-cycle-in-a-graph
+ *
+ *  [0,     1,    2,    3]
+ *   |      |     |     |
+ *  [1,2]  [2]  [0,3]  [3]
+ *  => Cycle: 0 -> 2 -> 0
+ *
+ *  0 -> 1 -> 2 -> 3
+ *  |
+ *  2
+ *  => No Cycle
  */
-class Graph(private val v: Int) {
+class Graph {
 
-    private val adjacentVertex: MutableList<MutableList<Int>> = mutableListOf()
+    fun execute() {
+        var graph = listOf(
+            listOf(1, 2),
+            listOf(2),
+            listOf(0, 3),
+            listOf(3)
+        )
+        println("Detect Circle In Directed Graph ${isCircle(graph)}")
 
-    init {
-        for (i in 0 until v) {
-            adjacentVertex.add(mutableListOf())
-        }
-    }
-
-    fun addEdge(source: Int, dest: Int) {
-        if (source < 0 || source >= adjacentVertex.size) {
-            return
-        }
-        adjacentVertex[source].add(dest)
+        graph = listOf(
+            listOf(1, 2),
+            listOf(2),
+            listOf(3),
+            listOf()
+        )
+        println("Detect Circle In Directed Graph ${isCircle(graph)}")
     }
 
     /**
-     * Check whether Graph has circle direction
-     * 1. Travel all adjacency vertexes (mark them as visited to avoid duplicated traveling)
-     *  - Do not travel the node has been marked as visited
-     *    + Example: 1 links to 2 & 3, and 2 also link to 3. So we should travel 3 once
-     *      - 1 -> 2
-     *      - 1 -> 3
-     *      - 2 -> 3
-     *      - 3 -> 4
-     * 2. Store the vertex which has been traveled, if meet the same vertex => it is a circle graph
-     *  - Remove the vertex when meet last vertex (have no adjacency)
+     * The solution is using DFS (Depth First Traversal) technique.
+     * It is based on the idea that there is a cycle in a graph only if there is a Back-Edge
+     * (a node points to one of its ancestors) present in the graph.
+     *
+     * To detect a Back-Edge, we need to keep track of the nodes visited till now
+     * and the nodes that are in the current recursion stack (the current path that we are visiting).
+     * If during recursion, we reach a node that is already in the recursion stack,
+     * there is a cycle present in the graph.
      */
-    fun isCircle(): Boolean {
+    private fun isCircle(graph: List<List<Int>>): Boolean {
         val visited = hashSetOf<Int>()
-        val stackChase = hashSetOf<Int>()
-        for (i in 0 until v) {
-            if (isCircle(i, visited, stackChase)) {
+        val recursionStack = hashSetOf<Int>()
+        for (i in graph.indices) {
+            if (isCircle(i, graph, visited, recursionStack)) {
                 return true
             }
         }
@@ -47,11 +58,12 @@ class Graph(private val v: Int) {
 
     private fun isCircle(
         vertex: Int,
+        graph: List<List<Int>>,
         visitedNodes: HashSet<Int>,
-        stackChase: HashSet<Int>
+        recursionStack: HashSet<Int>
     ): Boolean {
         // It contains a circle graph
-        if (stackChase.contains(vertex)) {
+        if (recursionStack.contains(vertex)) {
             return true
         }
         if (visitedNodes.contains(vertex)) {
@@ -59,15 +71,15 @@ class Graph(private val v: Int) {
         }
 
         visitedNodes.add(vertex)
-        stackChase.add(vertex)
-        adjacentVertex[vertex]
+        recursionStack.add(vertex)
+        graph[vertex]
             .forEach {
-                if (isCircle(it, visitedNodes, stackChase)) {
+                if (isCircle(it, graph, visitedNodes, recursionStack)) {
                     return true
                 }
             }
 
-        stackChase.remove(vertex)
+        recursionStack.remove(vertex)
         return false
     }
 }

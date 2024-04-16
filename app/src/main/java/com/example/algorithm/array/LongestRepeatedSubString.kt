@@ -27,28 +27,20 @@ class LongestRepeatedSubString {
     fun execute(input: String): String? {
         val n = input.length
         val halfInputLength = input.length / 2
-        var substringLength = 1
-        var longestRepeatedSubString: String? = null
+        var longestRepeatedSubString = ""
 
-        while (substringLength <= halfInputLength) {
+        for (substringLength in 1..halfInputLength) {
             for (i in 0 until (n - substringLength)) {
                 val substring = input.substring(i, i + substringLength)
-                val rightLeftSubstring = input.substring(i + substringLength, n)
+                val bottomSubstring = input.substring(i + substringLength, n)
                 // Only need to check with Right-Leftover substring,
                 // Because the Left-leftover substring already check at the begin when looping
-                if (rightLeftSubstring.contains(substring)) {
-                    when (longestRepeatedSubString) {
-                        null -> longestRepeatedSubString = substring
-                        else -> {
-                            if (longestRepeatedSubString.length < substring.length) {
-                                longestRepeatedSubString = substring
-                            }
-                        }
-                    }
+                if (bottomSubstring.contains(substring, true)
+                    && longestRepeatedSubString.length < substring.length
+                ) {
+                    longestRepeatedSubString = substring
                 }
             }
-
-            substringLength += 1
         }
 
         return longestRepeatedSubString

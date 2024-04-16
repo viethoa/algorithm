@@ -1,62 +1,49 @@
 package com.example.algorithm.array
 
 /**
- * Given a string, the task is to count all palindrome sub string in a given string.
- * Length of palindrome sub string is greater than or equal to 2.
+ * Given a string s, return the number of palindromic substrings in it.
+ * A string is a palindrome when it reads the same backward as forward.
  *
- * Example
- * Input : str = "abaab"
+ * Input: s = "abc"
  * Output: 3
- * Explanation :
- * All palindrome substring are :
- * "aba" , "aa" , "baab"
+ * Explanation: Three palindromic strings: "a", "b", "c".
  *
- * Input : str = "abbaeae"
- * Output: 4
- * Explanation :
- * All palindrome substring are :
- * "bb" , "abba" ,"aea","eae"
+ * Input: s = "aaa"
+ * Output: 6
+ * Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+ *
+ * Input: s = "abaab"
+ * Output: 8
+ * Explanation: Six palindromic strings: "aba" , "aa" , "baab", "a", "b", "a", "a", "b"
  */
 class CountAllPalindromeSubString {
 
     /**
-     * Solution O(n(n+1)/2)
+     * Solution: O(n^2)
      * Find all possible substring and check any of them is palindrome
-     * - Not count 1 character
-     * - Count from 2 characters to [input.length] characters
      */
     fun solution(input: String): Int {
-        if (input.length <= 1) {
-            return 0
-        }
-
-        var subString = 2
-        val palindromes = mutableListOf<String>()
-        while (subString <= input.length) {
-            for (i in 0..input.length - subString) {
-                val temp = input.substring(i, i + subString)
-                if (temp.isPalindromeString()) {
-                    palindromes.add(temp)
+        var count = 0
+        for (i in 1..input.length) {
+            for (j in 0..input.length - i) {
+                val subString = input.substring(j, j + i)
+                if (subString.isPalindromeString()) {
+                    count += 1
                 }
             }
-            subString += 1
         }
 
-        // Second solution
-//        for (i in 2..input.length) {
-//            for (j in 0..input.length - i) {
-//                val subString = input.substring(j, j + i)
-//                if (isPalindromeString(subString)) {
-//                    palindromes.add(subString)
-//                }
-//            }
-//        }
-
-        println(palindromes)
-        return palindromes.size
+        return count
     }
 }
 
 private fun String.isPalindromeString(): Boolean {
-    return this == this.reversed()
+    val n = this.length - 1
+    var reversed = ""
+    for (i in n downTo 0) {
+        reversed += this[i]
+    }
+
+    //println("Origin: $this - Reversed: $reversed")
+    return reversed == this
 }

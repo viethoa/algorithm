@@ -10,8 +10,8 @@ import java.util.Stack
  * it is mandatory to reverse st using recursion.
  *
  * Example 1:
- * Input: st = [1, 5, 3, 2, 4]
- * Output: [4, 2, 3, 5, 1]
+ * Input: st = [1, 2, 3, 4, 5]
+ * Output: [5, 4, 3, 2, 1]
  *
  * Example 2:
  * Input: st = [5, 17, 100, 11]

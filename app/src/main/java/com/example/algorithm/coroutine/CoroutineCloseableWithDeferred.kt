@@ -1,19 +1,34 @@
 package com.example.algorithm.coroutine
 
 import java.io.Closeable
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CoroutineCloseableWithDeferred : Closeable {
 
     private lateinit var deferred: Deferred<Int>
 
-    suspend fun getInt(): Int {
+    fun execute() {
+        CoroutineScope(Dispatchers.Main).launch {
+            println("Test ${getInt()}")
+            println("Test done")
+        }
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1000)
+            close()
+        }
+    }
+
+    private suspend fun getInt(): Int {
         withContext(Dispatchers.IO) {
             deferred = async { random() }
         }
@@ -21,17 +36,12 @@ class CoroutineCloseableWithDeferred : Closeable {
     }
 
     private fun random(): Int {
-        Thread.sleep(3000)
+        Thread.sleep(2000)
         return 10
     }
 
-    private fun random2(): Flow<String> = flow {
-        emit("TE")
-    }
-
     override fun close() {
-        if (::deferred.isInitialized) {
-            deferred.cancel()
-        }
+        println("close")
+        deferred.cancel()
     }
 }

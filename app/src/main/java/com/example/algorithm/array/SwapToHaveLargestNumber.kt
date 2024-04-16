@@ -6,7 +6,7 @@ package com.example.algorithm.array
  * Output: 9173
  *
  * Input: 92883
- * Output: 98283
+ * Output: 98823
  *
  * Input: 9832
  * Output: 9832
@@ -19,57 +19,48 @@ class SwapToHaveLargestNumber {
         println(useLoopSolution(listOf(9, 2, 8, 8, 3)))
         println(useLoopSolution(listOf(9, 8, 3, 2)))
         println("Sort Solution")
-        println(useSortSolution(1973))
-        println(useSortSolution(92883))
-        println(useSortSolution(9832))
+        println(swapToHaveLargeNumber("1973"))
+        println(swapToHaveLargeNumber("92883"))
+        println(swapToHaveLargeNumber("9832"))
     }
 
-    /**
-     * O(nlog(n)) solution
-     * - The Quick Sort is O(nlog(n))
-     */
-    private fun useSortSolution(input: Int): Int {
-        // Parse input to list of Character Integers
-        val numbers = arrayListOf<Int>()
-        input
-            .toString()
-            .forEach { character ->
-                numbers.add(character.toString().toInt())
-            }
+    private fun swapToHaveLargeNumber(number: String): String {
+        var largest = Int.MIN_VALUE
+        var largestIndex: Int? = null
+        var leftPosition: Int? = null
+        var rightPosition: Int? = null
 
-        // Find first position need to swap
-        val sortedNumbers = numbers.sortedDescending()
-        var firstPosition = -1
-        for (i in 0 until numbers.size) {
-            if (numbers[i] != sortedNumbers[i]) {
-                firstPosition = i
-                break
+        for (i in (number.length - 1) downTo 0) {
+            val char = number[i].toString().toInt()
+            // Check largest first
+            if (char > largest) {
+                largest = char
+                largestIndex = i
             }
-        }
-        // The input already a largest number, no need to do any swap
-        if (firstPosition == -1) {
-            return input
-        }
-
-        // Find the second position for swapping
-        var secondPosition = -1
-        for (i in 0 until numbers.size) {
-            if (sortedNumbers[firstPosition] == numbers[i]) {
-                secondPosition = i
-                break
+            // Check for possible swapping
+            if (char < largest) {
+                rightPosition = largestIndex
+                leftPosition = i
             }
         }
 
-        // Perform swap
-        val temp = numbers[firstPosition]
-        numbers[firstPosition] = sortedNumbers[firstPosition]
-        numbers[secondPosition] = temp
-        return numbers
-            .map { it.toString() }
-            .reduce { acc, next ->
-                "$acc$next"
+        if (leftPosition != null && rightPosition != null) {
+            return performSwap(number, leftPosition, rightPosition)
+        }
+
+        return number
+    }
+
+    private fun performSwap(number: String, left: Int, right: Int): String {
+        var newNumber = ""
+        for (i in number.indices) {
+            newNumber += when (i) {
+                right -> number[left]
+                left -> number[right]
+                else -> number[i]
             }
-            .toInt()
+        }
+        return newNumber
     }
 
     /**
@@ -97,5 +88,54 @@ class SwapToHaveLargestNumber {
         val temp = input[i]
         input[i] = input[j]
         input[j] = temp
+    }
+
+    /**
+     * Sort solution
+     * - Time: O(nlog(n)) (Quick Sort is O(nlog(n)))
+     * - Space: O(N)
+     */
+    private fun useSortSolution(input: Int): Int {
+        // Parse input to list of Character Integers
+        val numbers = arrayListOf<Int>()
+        input
+            .toString()
+            .forEach { character ->
+                numbers.add(character.toString().toInt())
+            }
+
+        // Find First-Position need to swap
+        val sortedNumbers = numbers.sortedDescending()
+        var firstPosition = -1
+        for (i in 0 until numbers.size) {
+            if (numbers[i] != sortedNumbers[i]) {
+                firstPosition = i
+                break
+            }
+        }
+        // The input already a largest number, no need to do any swap
+        if (firstPosition == -1) {
+            return input
+        }
+
+        // Find Second-Position for swapping
+        var secondPosition = -1
+        for (i in 0 until numbers.size) {
+            if (sortedNumbers[firstPosition] == numbers[i]) {
+                secondPosition = i
+                break
+            }
+        }
+
+        // Perform swap
+        val temp = numbers[firstPosition]
+        numbers[firstPosition] = sortedNumbers[firstPosition]
+        numbers[secondPosition] = temp
+        return numbers
+            .map { it.toString() }
+            .reduce { acc, next ->
+                "$acc$next"
+            }
+            .toInt()
     }
 }

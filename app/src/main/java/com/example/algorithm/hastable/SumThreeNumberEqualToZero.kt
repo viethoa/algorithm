@@ -34,10 +34,6 @@ class SumThreeNumberEqualToZero {
      * input[i] and input[j].
      */
     fun useHashSetSolution(input: List<Int>): Boolean {
-        if (input.size < 3) {
-            return false
-        }
-
         for (i in 0 until input.size - 1) {
             val hashSet = hashSetOf<Int>()
             for (j in i + 1 until input.size) {
@@ -56,10 +52,6 @@ class SumThreeNumberEqualToZero {
      *  O(n^3) Solution
      */
     fun useLoopSolution(input: List<Int>): Boolean {
-        if (input.size < 3) {
-            return false
-        }
-
         for (i in 0 until input.size - 2) {
             for (j in i + 1 until input.size - 1) {
                 for (z in j + 1 until input.size) {

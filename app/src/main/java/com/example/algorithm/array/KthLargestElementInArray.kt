@@ -15,43 +15,52 @@ package com.example.algorithm.array
 class KthLargestElementInArray {
 
     /**
-     * Sort solution O(N * logN)
+     * input: 1 2 3 4 5 5 6 6
+     * appear: [1:1] [2:1] [3:1] [4:1] [5:2] [6:2]
+     * result: k = 3 => 5
      */
 
     /**
-     * O(k*n) Solution
+     * QuickSort O(N*logN)
      */
-    fun solution(input: List<Int>, k: Int): Int? {
-        val kSortedElements = mutableListOf<Int>()
-        val kElementPositions = mutableListOf<Int>()
-        for (i in 0 until k) {
-            var kLargest = Integer.MIN_VALUE
-            val threshold = kSortedElements.lastOrNull()
-            var kLargestIndex = -1
-            input.forEachIndexed { index, element ->
-                when (threshold) {
-                    null -> {
-                        if (kLargest < element) {
-                            kLargest = element
-                            kLargestIndex = index
-                        }
-                    }
-                    else -> {
-                        if (kLargest <= element &&
-                            kLargest <= threshold &&
-                            !kElementPositions.contains(index)
-                        ) {
-                            kLargest = element
-                            kLargestIndex = index
-                        }
-                    }
-                }
-            }
+    private fun findKthLargestWithSort(input: List<Int>, k: Int): Int {
+        return input.sortedDescending()[k]
+    }
 
-            kSortedElements.add(kLargest)
-            kElementPositions.add(kLargestIndex)
+    /**
+     * Time Complexity: O(k*n)
+     * Space Complexity: O(k*n)
+     */
+    private fun findKthLargest(input: List<Int>, k: Int): Int {
+        var mutableK = k
+        var threshold = Int.MAX_VALUE
+        var kthLargest = Int.MIN_VALUE
+        val countedIndexes = arrayListOf<Int>()
+        while (mutableK > 0) {
+            val (largest, index) = findLargestWithThreshold(input, threshold, countedIndexes)
+            kthLargest = largest
+            threshold = largest
+            countedIndexes.add(index)
+            mutableK -= 1
         }
 
-        return kSortedElements.lastOrNull()
+        return kthLargest
+    }
+
+    private fun findLargestWithThreshold(
+        input: List<Int>,
+        threshold: Int,
+        countedIndexes: List<Int>
+    ): Pair<Int, Int> {
+        var largestIndex = -1
+        var largest = Int.MIN_VALUE
+        input.forEachIndexed { index, element ->
+            if (element >= largest && element <= threshold && !countedIndexes.contains(index)) {
+                largest = element
+                largestIndex = index
+            }
+        }
+
+        return Pair(largest, largestIndex)
     }
 }

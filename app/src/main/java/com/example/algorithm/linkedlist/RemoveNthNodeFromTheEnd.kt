@@ -5,10 +5,13 @@ package com.example.algorithm.linkedlist
  * the task is to delete the n-th node from the end of the given linked list.
  *
  * Examples:
- * Input: 2 -> 3 -> 1 -> 7 -> NULL, N = 1
+ * Input: 2 -> 3 -> 1 -> 7 -> Null, N = 1
  * Output: 2 -> 3 -> 1 -> Null
  *
- * Input: 1 -> 2 -> 3 -> 4 -> NULL, N = 4
+ * Input: 2 -> 3 -> 1 -> 7 -> Null, N = 2
+ * Output: 2 -> 3 -> 7 -> Null
+ *
+ * Input: 1 -> 2 -> 3 -> 4 -> Null, N = 4
  * Output: 2 -> 3 -> 4
  */
 class RemoveNthNodeFromTheEnd {
@@ -61,8 +64,8 @@ class RemoveNthNodeFromTheEnd {
         if (head.next == null) {
             return null
         }
-        val next = head.next
+        val newHead = head.next
         head.next = null
-        return next
+        return newHead
     }
 }

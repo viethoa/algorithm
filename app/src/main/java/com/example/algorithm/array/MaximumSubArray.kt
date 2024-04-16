@@ -21,48 +21,23 @@ package com.example.algorithm.array
 class MaximumSubArray {
 
     /**
-     * Complexity O(n)
+     * Kadane’s algorithm - Complexity O(n)
      */
     fun solution(input: List<Int>): Int {
-        var largestSum = Int.MIN_VALUE
-        var sum = 0
+        var maxSum = Int.MIN_VALUE
+        var currentSum = 0
         input.forEach { element ->
             // Sum the sub-array to find the largest
-            sum += element
-            // Track largest
-            if (largestSum < sum) {
-                largestSum = sum
+            currentSum += element
+            if (maxSum < currentSum) {
+                maxSum = currentSum
             }
             // Reset when the sum is smaller than 0
-            if (sum < 0) {
-                sum = 0
+            if (currentSum < 0) {
+                currentSum = 0
             }
         }
 
-        return largestSum
-    }
-
-    /**
-     * Complexity O(n^2)
-     */
-    fun solution2(input: List<Int>): Int {
-        if (input.isEmpty()) {
-            return 0
-        }
-        if (input.size == 1) {
-            return input[0]
-        }
-
-        var result = input.reduce { acc, next -> acc + next }
-        for (i in 0 until input.size - 1) {
-            for (j in i + 1 until input.size) {
-                val sumOfSubArray = input.subList(i, j).reduce { acc, next -> acc + next }
-                if (sumOfSubArray > result) {
-                    result = sumOfSubArray
-                }
-            }
-        }
-
-        return result
+        return maxSum
     }
 }

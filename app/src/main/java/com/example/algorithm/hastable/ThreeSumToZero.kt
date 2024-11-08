@@ -26,39 +26,32 @@ package com.example.algorithm.hastable
  * Input: [0, 1, 5, 10, -7, 3, 8, 1]
  * Output: false
  */
-class SumThreeNumberEqualToZero {
+class ThreeSumToZero {
+
+    fun execute() {
+        println(useHashSetSolution(listOf(2, -3, 1)))
+        println(useHashSetSolution(listOf(0, -1, 2, -3, 1)))
+        println(useHashSetSolution(listOf(1, -2, -2, 0, 5)))
+        println(useHashSetSolution(listOf(0, -1, 5, 10, 14, -7, -3, 4, 1)))
+        println(useHashSetSolution(listOf(0, -3, 5, 10, 14, -7, -6, 2, 1)))
+        println(useHashSetSolution(listOf(3, 3, -2, 10, -7, 3, -6, 1)))
+        println(useHashSetSolution(listOf(0, 1, 5, 10, -7, 3, 8, 1)))
+    }
 
     /**
-     * Solution: O(n^2) & O(n) Space Complexity
+     * Solution: O(n^2)
      * - The idea is HashSet should contain only number which is not
      * input[i] and input[j].
      */
-    fun useHashSetSolution(input: List<Int>): Boolean {
+    private fun useHashSetSolution(input: List<Int>): Boolean {
         for (i in 0 until input.size - 1) {
             val hashSet = hashSetOf<Int>()
             for (j in i + 1 until input.size) {
                 if (hashSet.contains(-(input[i] + input[j]))) {
                     return true
-                } else {
-                    hashSet.add(input[j])
                 }
-            }
-        }
 
-        return false
-    }
-
-    /**
-     *  O(n^3) Solution
-     */
-    fun useLoopSolution(input: List<Int>): Boolean {
-        for (i in 0 until input.size - 2) {
-            for (j in i + 1 until input.size - 1) {
-                for (z in j + 1 until input.size) {
-                    if (input[i] + input[j] + input[z] == 0) {
-                        return true
-                    }
-                }
+                hashSet.add(input[j])
             }
         }
 

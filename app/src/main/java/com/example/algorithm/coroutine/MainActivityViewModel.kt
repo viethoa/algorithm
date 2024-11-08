@@ -1,11 +1,9 @@
-package com.example.algorithm
+package com.example.algorithm.coroutine
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.algorithm.coroutine.TestFlowWithMultipleCollectors
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-
 
 class MainActivityViewModel : ViewModel() {
 
@@ -24,7 +22,7 @@ class MainActivityViewModel : ViewModel() {
             }
         }
         viewModelScope.launch {
-            test.subscribe()
+            test.emitData()
         }
     }
 }

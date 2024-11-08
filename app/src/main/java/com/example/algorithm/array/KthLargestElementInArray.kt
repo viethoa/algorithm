@@ -15,10 +15,13 @@ package com.example.algorithm.array
 class KthLargestElementInArray {
 
     /**
+     * Complexity: O(n)
+     *
      * input: 1 2 3 4 5 5 6 6
-     * appear: [1:1] [2:1] [3:1] [4:1] [5:2] [6:2]
+     * HashMap: [1:1] [2:1] [3:1] [4:1] [5:2] [6:2]
      * result: k = 3 => 5
      */
+
 
     /**
      * QuickSort O(N*logN)

@@ -21,11 +21,8 @@ package com.example.algorithm.array
 class RotationByKPosition {
 
     /**
-     * Solution (can use While instead of For)
-     * 1. Calculate the Final-K = K % input-size (only need to do k % input-size time)
-     * 2. Insert item from K to End list into temp array
-     * 3. Insert item from start to K into temp array
-     * 4. Copy temp array into original array
+     * Time Complexity: O(n)
+     * Space complexity: O(n)
      */
     fun execute(input: List<Int>, k: Int): List<Int> {
         val finalK = k % input.size
@@ -40,5 +37,4 @@ class RotationByKPosition {
 
         return output
     }
-
 }

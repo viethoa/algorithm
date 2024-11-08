@@ -20,11 +20,20 @@ package com.example.algorithm.array
  */
 class LongestRepeatedSubString {
 
+    fun execute() {
+        println("LongestRepeatedSubString ${longestRepeatedSubString("geaksfgeekstgeeks")}")
+        println("LongestRepeatedSubString ${longestRepeatedSubString("aabaabaaba")}")
+        println("LongestRepeatedSubString ${longestRepeatedSubString("aaaaaaaaaaa")}")
+        println("LongestRepeatedSubString ${longestRepeatedSubString("banana")}")
+        println("LongestRepeatedSubString ${longestRepeatedSubString("abaaba")}")
+        println("LongestRepeatedSubString ${longestRepeatedSubString("123456789")}")
+    }
+
     /**
      * Time Complexity: O((n^2)/2)
      * Space complexity: O(1)
      */
-    fun execute(input: String): String? {
+    private fun longestRepeatedSubString(input: String): String? {
         val n = input.length
         val halfInputLength = input.length / 2
         var longestRepeatedSubString = ""
@@ -32,10 +41,10 @@ class LongestRepeatedSubString {
         for (substringLength in 1..halfInputLength) {
             for (i in 0 until (n - substringLength)) {
                 val substring = input.substring(i, i + substringLength)
-                val bottomSubstring = input.substring(i + substringLength, n)
+                val remainSubstring = input.substring(i + substringLength, n)
                 // Only need to check with Right-Leftover substring,
                 // Because the Left-leftover substring already check at the begin when looping
-                if (bottomSubstring.contains(substring, true)
+                if (remainSubstring.contains(substring, true)
                     && longestRepeatedSubString.length < substring.length
                 ) {
                     longestRepeatedSubString = substring

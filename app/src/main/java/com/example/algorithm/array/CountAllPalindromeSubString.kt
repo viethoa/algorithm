@@ -25,7 +25,7 @@ class CountAllPalindromeSubString {
     fun solution(input: String): Int {
         var count = 0
         for (i in 1..input.length) {
-            for (j in 0..input.length - i) {
+            for (j in 0..(input.length - i)) {
                 val subString = input.substring(j, j + i)
                 if (subString.isPalindromeString()) {
                     count += 1
@@ -38,12 +38,5 @@ class CountAllPalindromeSubString {
 }
 
 private fun String.isPalindromeString(): Boolean {
-    val n = this.length - 1
-    var reversed = ""
-    for (i in n downTo 0) {
-        reversed += this[i]
-    }
-
-    //println("Origin: $this - Reversed: $reversed")
-    return reversed == this
+    return this == this.reversed()
 }

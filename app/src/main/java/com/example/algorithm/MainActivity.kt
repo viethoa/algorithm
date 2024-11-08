@@ -5,25 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.algorithm.array.CarParking
 import com.example.algorithm.array.CountAllPalindromeSubString
 import com.example.algorithm.array.CountSubArray
-import com.example.algorithm.array.KthLargestElementInArray
-import com.example.algorithm.array.LongestRepeatedSubString
-import com.example.algorithm.array.MaximumSubArray
+import com.example.algorithm.kadane.MaximumSubArray
 import com.example.algorithm.array.MinAbsoluteSumPair
 import com.example.algorithm.array.MinimumAbsoluteDifference
 import com.example.algorithm.array.MinimumParkingSpace
-import com.example.algorithm.array.SearchInRotatedSortedArray
+import com.example.algorithm.array.SingleNumber
 import com.example.algorithm.array.SlidingWindowMaximum
-import com.example.algorithm.array.SwapToHaveLargestNumber
 import com.example.algorithm.array.ValidPalindrome
-import com.example.algorithm.queue.BFS
-import com.example.algorithm.graph.Graph
 import com.example.algorithm.hastable.DetectLoopInALinkedList
 import com.example.algorithm.hastable.LongestConsecutiveSequence
 import com.example.algorithm.hastable.PairWithGivenSum
-import com.example.algorithm.hastable.SumThreeNumberEqualToZero
 import com.example.algorithm.hastable.FirstUniqueCharacterInString
-import com.example.algorithm.hastable.ValidAnagram
 import com.example.algorithm.linkedlist.*
+import com.example.algorithm.matrix.RotateImage
 import com.example.algorithm.queue.QueueRemoval
 import com.example.algorithm.queue.ReverseKElementOfQueue
 import com.example.algorithm.stack.CheckBalanceOfParenthesis
@@ -52,7 +46,6 @@ class MainActivity : AppCompatActivity() {
     private val sortStackUsingAnotherStack by lazy { SortAStackUsingAnotherStack() }
     private val checkBalanceOfParenthesis by lazy { CheckBalanceOfParenthesis() }
     private val pairWithGivenSum by lazy { PairWithGivenSum() }
-    private val validAnagram by lazy { ValidAnagram() }
     private val longestConsecutiveSequence by lazy { LongestConsecutiveSequence() }
     private val mergeSortedLinkedList by lazy { MergeTwoSortedLinkedList() }
     private val reverseLinkedList by lazy { ReverseLinkedList() }
@@ -63,8 +56,6 @@ class MainActivity : AppCompatActivity() {
     private val countBSTSubtreeNode by lazy { CountBSTSubtreeNode() }
     private val countIsland by lazy { CountIsland() }
     private val reverseKNodeFromHead by lazy { ReverseKNodeFromHead() }
-    private val swapToHaveLargestNumber by lazy { SwapToHaveLargestNumber() }
-    private val sumThreeNumberEqualToZero by lazy { SumThreeNumberEqualToZero() }
     private val findBinaryTreeWidth by lazy { FindBinaryTreeWidth() }
     private val countAllPalindromeSubString by lazy { CountAllPalindromeSubString() }
     private val findParentOfNode by lazy { FindParentOfNode() }
@@ -73,13 +64,9 @@ class MainActivity : AppCompatActivity() {
     private val minimumParkingSpace by lazy { MinimumParkingSpace() }
     private val slidingWindowMaximum by lazy { SlidingWindowMaximum() }
     private val validateIpAddress by lazy { ValidateIpAddress() }
-    private val longestRepeatedSubString by lazy { LongestRepeatedSubString() }
     private val validPalindrome by lazy { ValidPalindrome() }
     private val maximumSubArray by lazy { MaximumSubArray() }
     private val detectLoopInALinkedList by lazy { DetectLoopInALinkedList() }
-    private val detectCircleInDirectedGraph by lazy { Graph() }
-    private val breadthFirstSearch by lazy { BFS() }
-    private val binarySearch by lazy { SearchInRotatedSortedArray() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +77,16 @@ class MainActivity : AppCompatActivity() {
 
         //MainActivityViewModel().test() /* Test multiple subscriber into the same ShareFlow */
 
-        binarySearch.execute()
+        RotateImage().execute()
+        //SingleNumber().execute()
+        //LongPressedName().execute()
+        //SubProductLessThanK().execute()
+        //MaximumProductSubArray().execute()
+        //Merge2SortedArray().execute()
+        //GroupOfSpecialEquivalentString().execute()
+        //ProductOfArrayExceptSelf().execute()
+        //GroupAnagrams().execute()
+        //binarySearch.execute()
         //breadthFirstSearch.displayGraph()
         //detectCircleInDirectedGraph.execute()
         //CoroutineCloseableWithDeferred().execute()
@@ -144,8 +140,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun testMaximumSubArray() {
-        println("Maximum Sub-Array ${maximumSubArray.solution(listOf(-2,1,-3,4,-1,2,1,-5,4))}")
-        println("Maximum Sub-Array ${maximumSubArray.solution(listOf(5,4,-1,7,8))}")
+        println("Maximum Sub-Array ${maximumSubArray.solution(listOf(-2, 1, -3, 4, -1, 2, 1, -5, 4))}")
+        println("Maximum Sub-Array ${maximumSubArray.solution(listOf(5, 4, -1, 7, 8))}")
         println("Maximum Sub-Array ${maximumSubArray.solution(listOf(1))}")
     }
 
@@ -153,15 +149,6 @@ class MainActivity : AppCompatActivity() {
         println("Valid Palindrome ${validPalindrome.isValidPalindrome("A man, a plan, a canal: Panama")}")
         println("Valid Palindrome ${validPalindrome.isValidPalindrome("race a car")}")
         println("Valid Palindrome ${validPalindrome.isValidPalindrome("")}")
-    }
-
-    private fun testLongestRepeatedSubString() {
-        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("geaksfgeekstgeeks")}")
-        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("aabaabaaba")}")
-        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("aaaaaaaaaaa")}")
-        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("banana")}")
-        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("abaaba")}")
-        println("LongestRepeatedSubString ${longestRepeatedSubString.execute("123456789")}")
     }
 
     private fun testValidateIpAddress() {
@@ -280,25 +267,6 @@ class MainActivity : AppCompatActivity() {
             BinaryTreeNode(3, right = BinaryTreeNode(8))
         )
         println(findBinaryTreeWidth.solution(head))
-    }
-
-    private fun testSumThreeNumberEqualToZero() {
-        println("Loop Solution")
-        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(2, -3, 1)))
-        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(0, -1, 2, -3, 1)))
-        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(1, -2, -2, 0, 5)))
-        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(0, -1, 5, 10, 14, -7, -3, 4, 1)))
-        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(0, -3, 5, 10, 14, -7, -6, 2, 1)))
-        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(3, 3, -2, 10, -7, 3, -6, 1)))
-        println(sumThreeNumberEqualToZero.useLoopSolution(listOf(0, 1, 5, 10, -7, 3, 8, 1)))
-        println("Sort Solution")
-        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(2, -3, 1)))
-        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(0, -1, 2, -3, 1)))
-        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(1, -2, -2, 0, 5)))
-        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(0, -1, 5, 10, 14, -7, -3, 4, 1)))
-        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(0, -3, 5, 10, 14, -7, -6, 2, 1)))
-        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(3, 3, -2, 10, -7, 3, -6, 1)))
-        println(sumThreeNumberEqualToZero.useHashSetSolution(listOf(0, 1, 5, 10, -7, 3, 8, 1)))
     }
 
     private fun testReverseKNodeFromHead() {
@@ -440,12 +408,6 @@ class MainActivity : AppCompatActivity() {
         println(longestConsecutiveSequence.execute(listOf(1, 9, 3, 10, 4, 20, 2)))
         println(longestConsecutiveSequence.execute(listOf(0, 3, 7, 2, 5, 8, 4, 6, 0, 1)))
         println(longestConsecutiveSequence.execute(listOf(36, 41, 56, 35, 44, 33, 34, 92, 43, 32, 42)))
-    }
-
-    private fun testValidAnagram() {
-        println(validAnagram.solution1("listen", "silent"))
-        println(validAnagram.solution1("anagram", "nagaram"))
-        println(validAnagram.solution1("rat", "car"))
     }
 
     private fun testPairWithGivenSum() {

@@ -5,6 +5,7 @@ package com.example.algorithm.array
  *
  * Input: {100, 200, 300, 400},  k = 2
  * Output: 300
+ * Explanation: 100 + 200 = 300 is the minimum sun of sub-array [100, 200]
  *
  * Input: {1, 4, 2, 10, 23, 3, 1, 0, 20}, k = 4
  * Output: 17

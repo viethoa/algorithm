@@ -1,4 +1,4 @@
-package com.example.algorithm.array
+package com.example.algorithm.kadane
 
 /**
  * Given an integer array nums, find the sub-array with the largest sum, and return its sum.

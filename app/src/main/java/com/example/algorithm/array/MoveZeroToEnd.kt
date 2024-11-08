@@ -8,8 +8,8 @@ package com.example.algorithm.array
  * Expected Complexity: O(n) time complexity and O(1) space complexity.
  *
  * Example
- * Input: [0, 1, -2, 3, 4, 0, 5, -27, 9, 0],
- * Output: [1, -2, 3, 4, 5, -27, 9, 0, 0, 0].
+ * Input: [0, 1, -2, 3, 4, 0, 0, 5, -27, 9, 0],
+ * Output: [1, -2, 3, 4, 5, -27, 9, 0, 0, 0, 0].
  *
  * Input: [0, 0, 0, 0, 0, 1],
  * Output: [1, 0, 0, 0, 0, 0].
@@ -27,16 +27,16 @@ class MoveZeroToEnd {
 
     private fun moveZeroToEnd(input: IntArray) {
         // Move all non-zero elements to the front
-        var count = 0
+        var j = 0
         for (i in input.indices) {
             if (input[i] != 0) {
-                input[count] = input[i]
-                count += 1
+                input[j] = input[i]
+                j += 1
             }
         }
 
         // Set zero element at bottom
-        for (i in count until input.size) {
+        for (i in j until input.size) {
             input[i] = 0
         }
     }

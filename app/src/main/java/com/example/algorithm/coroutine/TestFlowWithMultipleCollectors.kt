@@ -10,7 +10,7 @@ class TestFlowWithMultipleCollectors(private val coroutineScope: CoroutineScope)
     private val _mySharedFlow = MutableSharedFlow<String>()
     val sharedFlow: SharedFlow<String> = _mySharedFlow
 
-    suspend fun subscribe() {
+    suspend fun emitData() {
         for (i in 0..10) {
             coroutineScope.launch { _mySharedFlow.emit("$i") }
         }

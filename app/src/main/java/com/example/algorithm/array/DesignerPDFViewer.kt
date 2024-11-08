@@ -7,11 +7,11 @@ package com.example.algorithm.array
  * assuming all letters are 1mm wide.
  *
  * Example
- * h = 1 3 1 3 1 4 1 3 2 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 6
- * word = abc
+ * h = 1 3 1 3 1 4 1 3 2 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 6 7
+ * word = adc
  * result = 9
  * Explanation:
- * - 'a' = 1, 'b' = 3, 'c' = 1. Max Height = 3
+ * - 'a' = 1, 'd' = 3, 'c' = 1. Max Height = 3
  * - 'abc' has length = 3
  * - The selection area = 3 * 3 = 9
  */
@@ -19,8 +19,8 @@ class DesignerPDFViewer {
 
     fun execute() {
         val input = arrayOf(1, 3, 1, 3, 1, 4, 1, 3, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7)
-        val result = calculateHighlightedArea(input, "zaba")
-        println("leftRotation: $result")
+        println("DesignerPDFViewer: ${calculateHighlightedArea(input, "zaba")}")
+        println("DesignerPDFViewer: ${calculateHighlightedArea(input, "dfasdfadsadsfasdfasdasgwqrtwerbsdfgsdfhstrhaertawresdfszdgzs")}")
     }
 
     private fun calculateHighlightedArea(height: Array<Int>, word: String): Int {

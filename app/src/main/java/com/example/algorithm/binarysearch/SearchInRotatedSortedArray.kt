@@ -1,4 +1,4 @@
-package com.example.algorithm.array
+package com.example.algorithm.binarysearch
 
 /**
  * There is an integer array nums sorted in ascending order (with distinct values).

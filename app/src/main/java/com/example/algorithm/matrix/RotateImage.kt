@@ -40,6 +40,7 @@ class RotateImage {
         // Transpose the image
         for (i in 0 until n) {
             for (j in i until n) {
+                //println(image[i][j])
                 val temp = image[i][j]
                 image[i][j] = image[j][i]
                 image[j][i] = temp

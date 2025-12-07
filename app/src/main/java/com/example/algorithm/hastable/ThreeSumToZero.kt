@@ -25,6 +25,8 @@ package com.example.algorithm.hastable
  *
  * Input: [0, 1, 5, 10, -7, 3, 8, 1]
  * Output: false
+ *
+ * https://leetcode.com/problems/3sum/description/
  */
 class ThreeSumToZero {
 

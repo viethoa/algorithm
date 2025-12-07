@@ -72,6 +72,8 @@ class GroupAnagrams {
         str.forEach { char ->
             if (hashMap.contains(char)) {
                 hashMap[char] = hashMap[char]!! - 1
+            } else {
+                return false
             }
         }
 

@@ -9,6 +9,8 @@ import com.example.algorithm.linkedlist.Node
  * 1 --> 2 --> 3 --> 4
  *             |     |
  *             6 <-- 5
+ *
+ * https://leetcode.com/problems/linked-list-cycle/description/
  */
 class DetectLoopInALinkedList {
 

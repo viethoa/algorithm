@@ -24,21 +24,17 @@ package com.example.algorithm.hastable
 class IntersectionOfTwoArrays {
 
     private fun intersection(nums1: IntArray, nums2: IntArray): IntArray {
-        val hashMap = hashMapOf<Int, Int>()
+        val hashSet = hashSetOf<Int>()
+        val output = hashSetOf<Int>()
         nums1.forEach { element ->
-            if (!hashMap.contains(element)) {
-                hashMap[element] = 1
-            }
+            hashSet.add(element)
         }
         nums2.forEach { element ->
-            if (hashMap.contains(element)) {
-                hashMap[element] = hashMap[element]!! - 1
+            if (hashSet.contains(element)) {
+                output.add(element)
             }
         }
 
-        return hashMap
-            .filter { it.value != 1 }
-            .map { it.key }
-            .toIntArray()
+        return output.toIntArray()
     }
 }

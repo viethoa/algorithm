@@ -5,12 +5,14 @@ package com.example.algorithm.hastable
  * You may return the answer in any order.
  *
  * Example 1:
- * Input: nums = [1,1,1,2,2,3,3,4], k = 2
- * Output: [1,2,3]
+ * Input: nums = [1,1,1,2,2,2,3,3,4], k = 2
+ * Output: [1,2]
  *
  * Example 2:
  * Input: nums = [1], k = 1
  * Output: [1]
+ *
+ * https://leetcode.com/problems/top-k-frequent-elements/description/
  */
 class TopKFrequentElements {
 
@@ -31,13 +33,10 @@ class TopKFrequentElements {
             }
         }
 
-        val result = arrayListOf<Int>()
-        hashMap.forEach { (key, value) ->
-            if (value >= k) {
-                result.add(key)
-            }
-        }
-
-        return result
+        return hashMap
+            .entries
+            .sortedByDescending { it.value }
+            .map { it.key }
+            .take(k)
     }
 }

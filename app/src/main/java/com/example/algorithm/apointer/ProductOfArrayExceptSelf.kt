@@ -1,12 +1,11 @@
 package com.example.algorithm.apointer
 
-import kotlin.math.abs
-
 /**
  * Given an array arr[] of n integers, construct a Product Array prod[] (of the same size)
  * such that prod[i] is equal to the product of all the elements of arr[] except arr[i].
  * Note: Solve it without the division operator in O(n) time.
- * - https://www.geeksforgeeks.org/a-product-array-puzzle/
+ *
+ * https://leetcode.com/problems/product-of-array-except-self/
  *
  * Example
  * Input: {10, 3, 5, 6, 2}
@@ -39,20 +38,20 @@ class ProductOfArrayExceptSelf {
      * Step 2: [120 ,60 ,40 ,30, 24]
      */
     private fun productExceptSelf(input: IntArray): IntArray {
-        val result = IntArray(input.size).apply {
-            fill(1)
+        val result = IntArray(input.size)
+
+        // Calculate left product
+        var left = 1
+        for (i in input.indices) {
+            result[i] = left
+            left *= input[i]
         }
 
-        var leftProduct = 1
-        input.forEachIndexed { index, element ->
-            result[index] *= abs(leftProduct)
-            leftProduct *= element
-        }
-
-        var rightProduct = 1
-        for (i in input.size - 1 downTo 0) {
-            result[i] *= abs(rightProduct)
-            rightProduct *= input[i]
+        // Calculate right product
+        var right = 1
+        for (i in (input.size - 1) downTo 0) {
+            result[i] *= right
+            right *= input[i]
         }
 
         return result

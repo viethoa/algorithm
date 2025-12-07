@@ -21,12 +21,14 @@ import java.util.*
 class CheckBalanceOfParenthesis {
 
     fun isBalance(input: String): Boolean {
-        val stack = Stack<String>()
-        for (char in input) {
-            when {
-                isOpenBracket(char.toString()) -> stack.push(char.toString())
+        val stack = Stack<Char>()
+        input.forEach { char ->
+            when(char) {
+                '(',
+                '{',
+                '[' -> stack.push(char)
                 else -> {
-                    if (!checkBalance(stack, char.toString())) {
+                    if (stack.isEmpty() || !isBalance(stack.pop(), char)) {
                         return false
                     }
                 }
@@ -36,21 +38,11 @@ class CheckBalanceOfParenthesis {
         return stack.isEmpty()
     }
 
-    private fun isOpenBracket(bracket: String): Boolean {
-        return bracket == "(" || bracket == "[" || bracket == "{"
-    }
-
-    private fun checkBalance(stack: Stack<String>, element: String): Boolean {
-        // Element is close bracket but not any opening bracket
-        if (stack.isEmpty()) {
-            return false
-        }
-        // Close bracket must be stick with an opening bracket
-        val bracket = stack.pop()
-        return when (element) {
-            ")" -> bracket == "("
-            "]" -> bracket == "["
-            "}" -> bracket == "{"
+    private fun isBalance(open: Char, close: Char): Boolean {
+        return when (open) {
+            '(' -> close == ')'
+            '{' -> close == '}'
+            '[' -> close == ']'
             else -> false
         }
     }

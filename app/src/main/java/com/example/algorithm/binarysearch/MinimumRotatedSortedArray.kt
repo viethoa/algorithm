@@ -34,6 +34,9 @@ class MinimumRotatedSortedArray {
         println(binarySearch(nums, 0, nums.size - 1))
     }
 
+    /**
+     * Search inside the rotated sub-array to find smallest number
+     */
     private fun binarySearch(nums: IntArray, left: Int, right: Int): Int {
         if (nums[left] < nums[right]) {
             return nums[left] // this is the Minimum

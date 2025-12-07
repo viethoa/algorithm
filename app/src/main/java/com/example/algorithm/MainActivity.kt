@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         //MainActivityViewModel().test() /* Test multiple subscriber into the same ShareFlow */
 
-        RotateImage().execute()
+        //RotateImage().execute()
         //SingleNumber().execute()
         //LongPressedName().execute()
         //SubProductLessThanK().execute()

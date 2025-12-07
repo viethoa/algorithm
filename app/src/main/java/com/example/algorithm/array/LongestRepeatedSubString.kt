@@ -33,7 +33,7 @@ class LongestRepeatedSubString {
      * Time Complexity: O((n^2)/2)
      * Space complexity: O(1)
      */
-    private fun longestRepeatedSubString(input: String): String? {
+    private fun longestRepeatedSubString(input: String): String {
         val n = input.length
         val halfInputLength = input.length / 2
         var longestRepeatedSubString = ""

@@ -2,6 +2,8 @@ package com.example.algorithm.array
 
 /**
  * Swap one time only to have a largest number
+ * https://leetcode.com/problems/maximum-swap/description/
+ *
  * Input: 1973
  * Output: 9173
  *
@@ -15,48 +17,47 @@ class SwapToHaveLargestNumber {
 
     fun execute() {
         println("Sort Solution")
-        println(swapToHaveLargeNumber("1973"))
-        println(swapToHaveLargeNumber("92938"))
-        println(swapToHaveLargeNumber("92438"))
-        println(swapToHaveLargeNumber("9832"))
+        println(swapToHaveLargeNumber(1973))
+        println(swapToHaveLargeNumber(92938))
+        println(swapToHaveLargeNumber(92438))
+        println(swapToHaveLargeNumber(9832))
     }
 
-    private fun swapToHaveLargeNumber(number: String): String {
+    private fun swapToHaveLargeNumber(number: Int): Int {
         var largest = Int.MIN_VALUE
-        var largestIndex: Int? = null
-        var leftPosition: Int? = null
-        var rightPosition: Int? = null
+        var largestPos: Int? = null
+        var leftPos: Int? = null
+        var rightPos: Int? = null
 
-        for (i in (number.length - 1) downTo 0) {
-            val char = number[i].toString().toInt()
-            // Check largest first
-            if (char > largest) {
-                largest = char
-                largestIndex = i
+        val numStr = number.toString()
+        for (i in (numStr.length - 1) downTo 0) {
+            val element = numStr[i].code
+            if (element > largest) {
+                largest = element
+                largestPos = i
             }
-            // Check for possible swapping
-            if (char < largest) {
-                rightPosition = largestIndex
-                leftPosition = i
+            if (element < largest) {
+                leftPos = i
+                rightPos = largestPos
             }
         }
 
-        if (leftPosition != null && rightPosition != null) {
-            return performSwap(number, leftPosition, rightPosition)
+        if (rightPos != null && leftPos != null) {
+            return performSwap(numStr, leftPos, rightPos)
         }
 
         return number
     }
 
-    private fun performSwap(number: String, left: Int, right: Int): String {
+    private fun performSwap(num: String, left: Int, right: Int): Int {
         var newNumber = ""
-        for (i in number.indices) {
-            newNumber += when (i) {
-                right -> number[left]
-                left -> number[right]
-                else -> number[i]
+        num.forEachIndexed { index, value ->
+            when (index) {
+                left -> newNumber += num[right]
+                right -> newNumber += num[left]
+                else -> newNumber += value
             }
         }
-        return newNumber
+        return newNumber.toInt()
     }
 }

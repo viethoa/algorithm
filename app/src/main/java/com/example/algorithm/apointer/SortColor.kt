@@ -36,59 +36,24 @@ class SortColor {
      * Space Complexity: O(1)
      */
     private fun sortColor(nums: IntArray) {
-        var count0 = 0
-        var count1 = 0
-        nums.forEach { element ->
-            when (element) {
-                0 -> count0++
-                1 -> count1++
-            }
-        }
-
-        var i = 0
-        while (i < nums.size) {
-            when {
-                count0 >= 0 -> {
-                    nums[i] = 0
-                    count0--
-                }
-                count1 >= 0 -> {
-                    nums[i] = 1
-                    count1--
-                }
-                else -> {
-                    nums[i] = 2
-                }
-            }
-            i++
+        // Move all 0 to left
+        val leftPosition = moveAllXToLeft(0, 0, nums)
+        // Move all 1 to left from leftPosition
+        if (leftPosition < nums.size - 1) {
+            moveAllXToLeft(leftPosition, 1, nums)
         }
     }
 
-    /**
-     * Time Complexity: O(n)
-     * Space Complexity: O(1)
-     */
-    private fun sortColor2(nums: IntArray) {
-        var size = nums.size
-        for (i in 2 downTo 0) {
-            size = moveXToTheEnd(nums, size, i)
-        }
-    }
-
-    private fun moveXToTheEnd(nums: IntArray, n: Int, x: Int): Int {
-        var j = 0
-        // Move all items except X into front
-        for (i in 0 until n) {
-            if (nums[i] != x) {
-                nums[j] = nums[i]
-                j++
+    private fun moveAllXToLeft(begin: Int, number: Int, nums: IntArray): Int {
+        var i = begin
+        for (j in nums.indices) {
+            if (nums[j] == number) {
+                val temp = nums[i]
+                nums[i] = nums[j]
+                nums[j] = temp
+                i++
             }
         }
-        // Set X item at the bottom
-        for (i in j until n) {
-            nums[i] = x
-        }
-
-        return j
+        return i
     }
 }

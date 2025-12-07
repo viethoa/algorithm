@@ -23,21 +23,18 @@ package com.example.algorithm.array
 class PlusOne {
 
     private fun plusOne(digits: IntArray): IntArray {
-        var i = digits.size - 1
+        val n = digits.size
+        for (i in (n - 1) downTo 0) {
+            val newNumber = digits[i] + 1
+            if (newNumber <= 9) {
+                digits[i] = newNumber
+                return digits
+            }
 
-        // Move i to position which digits[i] < 9
-        while (i >= 0 && digits[i] == 9) {
             digits[i] = 0
-            i -= 1
-        }
-        // Plus 1 for possible position
-        if (i >= 0) {
-            digits[i] = digits[i] + 1
-            return digits
         }
 
-        // All digits are 9, need to create new list
-        val newDigits = IntArray(digits.size + 1)
+        val newDigits = IntArray(n + 1)
         newDigits.fill(0)
         newDigits[0] = 1
         return newDigits

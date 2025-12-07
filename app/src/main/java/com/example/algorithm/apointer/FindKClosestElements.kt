@@ -25,13 +25,13 @@ class FindKClosestElements {
      * Space Complexity: O(k)
      */
     private fun findClosestElements(arr: IntArray, k: Int, x: Int): List<Int> {
-        var right = arr.size - 1
         var left = 0
-        while (right - left >= k) {
-            if (abs(arr[left] - x) > abs(arr[right] - x)) {
-                left++
-            } else {
+        var right = arr.size - 1
+        while ((right - left) >= k) {
+            if (abs(arr[left] - x) <= abs(arr[right] - x)) {
                 right--
+            } else {
+                left++
             }
         }
 
@@ -43,12 +43,4 @@ class FindKClosestElements {
 
         return result
     }
-
-    /**
-     * Time Complexity: O(k * log(n))
-     * Space Complexity: O(k)
-     *
-     * Use binary search to find cross-over position
-     * Loop to left and right to get k closest elements
-     */
 }

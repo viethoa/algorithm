@@ -28,25 +28,27 @@ class LongestConsecutiveSequence {
      * 2. If count > LCS, LCS = count
      */
     fun execute(input: List<Int>): Int {
-        val set = hashSetOf<Int>()
+        val hashSet = hashSetOf<Int>()
         input.forEach { element ->
-            if (!set.contains(element)) {
-                set.add(element)
+            if (!hashSet.contains(element)) {
+                hashSet.add(element)
             }
         }
 
-        var longestConsecutiveSequence = 0
-        set.forEach { element ->
-            var temp = element + 1
-            while (set.contains(temp)) {
-                temp++
+        var longestCS = 0
+        hashSet.forEach { num ->
+            var count = 0
+            var temp = num
+            while (hashSet.contains(temp)) {
+                count++
+                temp = temp + 1
             }
-            val count = temp - element
-            if (count > longestConsecutiveSequence) {
-                longestConsecutiveSequence = count
+
+            if (longestCS < count) {
+                longestCS = count
             }
         }
 
-        return longestConsecutiveSequence
+        return longestCS
     }
 }

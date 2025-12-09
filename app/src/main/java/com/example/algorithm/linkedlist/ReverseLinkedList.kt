@@ -15,6 +15,8 @@ package com.example.algorithm.linkedlist
  * 1->2->3->4->5->NULL
  * Output: Linked list should be changed to,
  * 5->4->3->2->1->NULL
+ *
+ * https://leetcode.com/problems/reverse-linked-list/description/
  */
 class ReverseLinkedList {
 
@@ -26,18 +28,14 @@ class ReverseLinkedList {
      *  - Set Current.next = prev
      * 3. Set New Head = prev
      */
-    fun solution1(head: Node): Node {
-        if (head.next == null) {
-            return head /* Only one 1 in the list */
-        }
-
+    fun solution1(head: Node?): Node {
+        var node = head
         var prev: Node? = null
-        var current: Node? = head
-        while (current != null) {
-            val next = current.next
-            current.next = prev
-            prev = current
-            current = next
+        while (node != null) {
+            val next = node.next
+            node.next = prev
+            prev = node
+            node = next
         }
 
         return prev!! /* after revert Prev will be New Head */

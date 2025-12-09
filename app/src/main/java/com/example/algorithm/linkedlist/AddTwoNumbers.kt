@@ -16,6 +16,8 @@ package com.example.algorithm.linkedlist
  *
  * Input: [9,9,9,9,9,9,9] & [9,9,9,9]
  * Output: [8,9,9,9,0,0,0,1]
+ *
+ * https://leetcode.com/problems/add-two-numbers/description/
  */
 class AddTwoNumbers {
 
